@@ -206,20 +206,17 @@ marimo/_static/
 marimo/_lsp/
 __marimo__/
 
-# --- Projeto hyde-legal-retrieval ---
+# --- hyde-legal-retrieval Project ---
 
-# Dados (corpus e queries podem ser pesados)
 data/corpus/
 data/queries/
 
-# Resultados gerados localmente
 results/
 
-# Modelos e embeddings baixados (HuggingFace, etc.)
+# Models and embeddings downloaded (HuggingFace, etc.)
 *.bin
 *.safetensors
 *.gguf
 
-# IDEs (caso queira versionar configurações do time, remova estas linhas)
 .vscode/
 .idea/
