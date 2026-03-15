@@ -1,0 +1,2 @@
+#pip install -r requirements.txt
+playwright==1.56.0 #bash: playwright install chromium
