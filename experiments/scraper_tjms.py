@@ -33,7 +33,8 @@ from playwright.sync_api import sync_playwright, TimeoutError as PWTimeout
 BASE_URL          = "https://esaj.tjms.jus.br/cjsg/resultadoCompleta.do"
 OUTPUT_FILE       = "ementas.json"
 DELAY_S           = 0.8   # pause between requests (seconds)
-LIMIT_PER_SEARCH  = 50    # max ementas per search term
+LIMIT_PER_SEARCH  = 167    # max ementas per search term
+MIN_WORD_COUNT    = 500   # discard ementas with fewer words than this
 
 SEARCH_TERMS = [
     "Apelação Cível",
@@ -135,15 +136,22 @@ def collect_ementas_from_page(
             page.wait_for_selector(f"#{div_id}", state="visible", timeout=10_000)
             texto = page.inner_text(f"#{div_id}").strip()
 
+            word_count = len(texto.split())
+            if word_count < MIN_WORD_COUNT:
+                print(f"    ✗ {numero_processo} — {word_count} words (below {MIN_WORD_COUNT} minimum) — skipping")
+                seen.add(numero_processo)  # mark as seen to avoid re-processing
+                continue
+
             results.append({
                 "numero_processo": numero_processo,
                 "cdacordao":       cdacordao,
                 "classe":          classe,
                 "texto":           texto,
+                "word_count":      word_count,
             })
             seen.add(numero_processo)
             restantes -= 1
-            print(f"    ✓ {numero_processo} | {classe} ({len(texto)} chars)")
+            print(f"    ✓ {numero_processo} | {classe} ({word_count} words)")
 
             # Close popup if a close button is present
             try:
@@ -170,16 +178,61 @@ def collect_ementas_from_page(
 
 
 def go_to_next_page(page) -> bool:
-    """Clicks the 'Next' pagination link if available. Returns True on success."""
+    """
+    Navigates to the next results page using the pagination inside
+    div.trocaDePagina.
+
+    The arrow link with title="Próxima página" always points to the correct
+    next page (its name attribute is already set to the next page number by
+    the site). We use that link rather than computing the page number manually.
+
+    There are two pagination blocks (top and bottom) — we click the first one
+    found. All links have no href; they trigger JS navigation internally.
+    We detect page change by watching the first cdacordao token on the page.
+
+    Returns:
+        True if navigation succeeded, False if no next page was found.
+    """
     try:
-        next_link = page.query_selector(
-            "a:has-text('Próxima'), a:has-text('>>'), a[title='Próxima página']"
-        )
-        if next_link:
-            next_link.click()
-            page.wait_for_load_state("networkidle", timeout=20_000)
-            time.sleep(DELAY_S)
-            return True
+        # Capture a token from the current page to detect when it changes
+        old_token = page.evaluate("""
+            () => {
+                const a = document.querySelector("a.downloadEmenta");
+                return a ? a.getAttribute("cdacordao") : "";
+            }
+        """)
+
+        # Click the "Próxima página" arrow — it always points to the right page
+        clicked = page.evaluate("""
+            () => {
+                const link = document.querySelector(
+                    "div.trocaDePagina a[title='Próxima página']"
+                );
+                if (link) { link.click(); return true; }
+                return false;
+            }
+        """)
+
+        if not clicked:
+            return False
+
+        # Wait until the first result on the page changes (max ~15 s)
+        deadline = time.time() + 15
+        while time.time() < deadline:
+            time.sleep(0.5)
+            new_token = page.evaluate("""
+                () => {
+                    const a = document.querySelector("a.downloadEmenta");
+                    return a ? a.getAttribute("cdacordao") : "";
+                }
+            """)
+            if new_token and new_token != old_token:
+                time.sleep(DELAY_S)
+                return True
+
+        # Timed out waiting for page change
+        return False
+
     except Exception:
         pass
     return False
