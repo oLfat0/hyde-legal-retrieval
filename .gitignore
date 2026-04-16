@@ -10,9 +10,11 @@ venv.bak/
 
 # --- Projeto hyde-legal-retrieval ---
 
-# Dados
-data/corpus/
-data/queries/
+# # Dados
+# data/corpus/
+# data/queries/
 
 # Resultados gerados localmente
-results/
+# results/
+bm25_index/
+faiss_index/

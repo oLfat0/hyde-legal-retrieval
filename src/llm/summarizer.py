@@ -33,7 +33,7 @@ from src.assets import (
     VLLM_BASE_URL,
     DEFAULT_MODEL,
     LLM_AGENT_TIMEOUT,
-    SUMMARY_TEMPERATURE,
+    LLM_TEMPERATURE,
     SUMMARY_MAX_TOKENS,
     SUMMARY_MAX_WORDS,
     PROMPT_MINI_RESUMO,
@@ -79,7 +79,7 @@ def generate_mini_summary(prompt: str) -> str:
     response = client.chat.completions.create(
         model=DEFAULT_MODEL,
         messages=[{"role": "user", "content": prompt}],
-        temperature=SUMMARY_TEMPERATURE,
+        temperature=LLM_TEMPERATURE,
         max_tokens=SUMMARY_MAX_TOKENS,
     )
     summary = response.choices[0].message.content.strip()
