@@ -1,0 +1,149 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans)}
+.wrap{padding:1rem 0 2rem}
+.legend{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:1.5rem;font-size:12px;color:var(--color-text-secondary)}
+.legend span{display:flex;align-items:center;gap:5px}
+.legend i{width:10px;height:10px;border-radius:2px;display:inline-block}
+.section-label{font-size:13px;font-weight:500;color:var(--color-text-secondary);margin:1.5rem 0 0.5rem;letter-spacing:.02em}
+.chart-wrap{position:relative;width:100%;height:260px;margin-bottom:.5rem}
+.delta-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1.5rem}
+.delta-card{flex:1;min-width:100px;background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:10px 12px}
+.delta-label{font-size:11px;color:var(--color-text-secondary);margin-bottom:4px}
+.delta-val{font-size:15px;font-weight:500}
+.pos{color:#1D9E75}.neg{color:#E24B4A}.neu{color:var(--color-text-secondary)}
+.note{background:var(--color-background-secondary);border-left:3px solid #378ADD;border-radius:0 var(--border-radius-md) var(--border-radius-md) 0;padding:10px 14px;font-size:13px;color:var(--color-text-secondary);margin-top:1rem;line-height:1.5}
+.section-title{font-size:15px;font-weight:500;color:var(--color-text-primary);margin:1.5rem 0 .5rem}
+</style>
+
+<div class="wrap">
+  <div class="legend">
+    <span><i style="background:#378ADD"></i>Baseline + Dense</span>
+    <span><i style="background:#7F77DD"></i>HyDE + Dense (T=0.2)</span>
+    <span><i style="background:#9FE1CB;border:1px solid #1D9E75"></i>HyDE + Dense (T=0.7)</span>
+    <span><i style="background:#1D9E75"></i>Baseline + Hybrid</span>
+    <span><i style="background:#EF9F27"></i>HyDE + Hybrid (T=0.2)</span>
+    <span><i style="background:#D85A30;border:1px solid #993C1D"></i>HyDE + Hybrid (T=0.7)</span>
+  </div>
+
+  <div class="section-title">Recall@k</div>
+  <div class="chart-wrap">
+    <canvas id="c-recall" role="img" aria-label="Gráfico de barras agrupadas mostrando Recall@1, @5 e @10 para as 6 configurações experimentais">Recall@1: Baseline Dense 0.53, HyDE Dense T0.2 0.50, HyDE Dense T0.7 0.48, Baseline Hybrid 0.60, HyDE Hybrid T0.2 0.60, HyDE Hybrid T0.7 0.58.</canvas>
+  </div>
+
+  <div class="section-title">MRR e nDCG@10</div>
+  <div class="chart-wrap">
+    <canvas id="c-mrr" role="img" aria-label="Gráfico de barras comparando MRR e nDCG@10 entre as 6 configurações">MRR: Baseline Dense 0.58, HyDE Dense T0.2 0.56, HyDE Dense T0.7 0.55.</canvas>
+  </div>
+
+  <p class="section-title">Impacto de T=0.7 sobre T=0.2 (Dense Retrieval)</p>
+  <div class="delta-row" id="delta-dense"></div>
+
+  <p class="section-title">Impacto de T=0.7 sobre T=0.2 (Hybrid Retrieval)</p>
+  <div class="delta-row" id="delta-hybrid"></div>
+
+  <div class="note" id="insight"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const DATA = {
+  bl_dense :  {r1:.5289,r5:.6447,r10:.6986,mrr:.5827,ndcg10:.6104},
+  hd_02    :  {r1:.4970,r5:.6487,r10:.6866,mrr:.5606,ndcg10:.5912},
+  hd_07    :  {r1:.4790,r5:.6307,r10:.6846,mrr:.5450,ndcg10:.5786},
+  bl_hybrid:  {r1:.6048,r5:.7705,r10:.8263,mrr:.6734,ndcg10:.7101},
+  hh_02    :  {r1:.5968,r5:.7745,r10:.8244,mrr:.6712,ndcg10:.7081},
+  hh_07    :  {r1:.5808,r5:.7884,r10:.8263,mrr:.6646,ndcg10:.7041},
+};
+
+const COLORS = {
+  bl_dense :'#378ADD',
+  hd_02    :'#7F77DD',
+  hd_07    :'#5DCAA5',
+  bl_hybrid:'#1D9E75',
+  hh_02    :'#EF9F27',
+  hh_07    :'#D85A30',
+};
+const LABELS = ['Baseline+Dense','HyDE+Dense T0.2','HyDE+Dense T0.7','Baseline+Hybrid','HyDE+Hybrid T0.2','HyDE+Hybrid T0.7'];
+const KEYS   = ['bl_dense','hd_02','hd_07','bl_hybrid','hh_02','hh_07'];
+
+function mkDataset(key,field){
+  return{label:LABELS[KEYS.indexOf(key)],data:[DATA[key][field]],backgroundColor:COLORS[key]+'CC',borderColor:COLORS[key],borderWidth:1};
+}
+
+// -- Recall chart --
+new Chart(document.getElementById('c-recall'),{
+  type:'bar',
+  data:{
+    labels:['Recall@1','Recall@5','Recall@10'],
+    datasets:KEYS.map(k=>({
+      label:LABELS[KEYS.indexOf(k)],
+      data:['r1','r5','r10'].map(f=>DATA[k][f]),
+      backgroundColor:COLORS[k]+'CC',
+      borderColor:COLORS[k],
+      borderWidth:1,
+    }))
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false}},
+    scales:{y:{min:.4,max:.9,ticks:{callback:v=>v.toFixed(2)}}}
+  }
+});
+
+// -- MRR + nDCG chart --
+new Chart(document.getElementById('c-mrr'),{
+  type:'bar',
+  data:{
+    labels:['MRR','nDCG@10'],
+    datasets:KEYS.map(k=>({
+      label:LABELS[KEYS.indexOf(k)],
+      data:['mrr','ndcg10'].map(f=>DATA[k][f]),
+      backgroundColor:COLORS[k]+'CC',
+      borderColor:COLORS[k],
+      borderWidth:1,
+    }))
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false}},
+    scales:{y:{min:.4,max:.8,ticks:{callback:v=>v.toFixed(2)}}}
+  }
+});
+
+// -- Delta cards --
+function deltaCards(containerId, key02, key07){
+  const container = document.getElementById(containerId);
+  const metrics = [
+    {label:'R@1',   f:'r1'},
+    {label:'R@5',   f:'r5'},
+    {label:'R@10',  f:'r10'},
+    {label:'MRR',   f:'mrr'},
+    {label:'nDCG@10',f:'ndcg10'},
+  ];
+  metrics.forEach(({label,f})=>{
+    const diff = DATA[key07][f] - DATA[key02][f];
+    const sign = diff > 0.0001 ? '+' : diff < -0.0001 ? '' : '±';
+    const cls  = diff > 0.0001 ? 'pos' : diff < -0.0001 ? 'neg' : 'neu';
+    const card = document.createElement('div');
+    card.className = 'delta-card';
+    card.innerHTML = `<div class="delta-label">${label}</div><div class="delta-val ${cls}">${sign}${(diff*100).toFixed(2)}pp</div>`;
+    container.appendChild(card);
+  });
+}
+deltaCards('delta-dense',  'hd_02','hd_07');
+deltaCards('delta-hybrid', 'hh_02','hh_07');
+
+// -- Insight --
+const best = {config:'HyDE+Hybrid T=0.2',val:DATA.hh_02.r5};
+const note = document.getElementById('insight');
+note.innerHTML = `
+  <strong>Leitura principal:</strong> T=0.7 piorou todas as métricas no Dense Retrieval (−1.8pp em R@1 vs T=0.2), 
+  mas melhorou Recall@5 e Recall@10 no Hybrid (+1.4pp e +0.2pp). 
+  O padrão sugere que temperatura maior gera textos mais variados lexicalmente — 
+  isso <em>prejudica</em> a precisão semântica pura (Dense), mas 
+  <em>complementa melhor</em> o BM25 na fusão híbrida, 
+  aumentando cobertura nas posições intermediárias do ranking.
+`;
+</script>
