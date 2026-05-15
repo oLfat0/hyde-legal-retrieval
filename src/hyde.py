@@ -1,19 +1,24 @@
 """
 hyde.py
 -------
-Geracao de documentos hipotetricos (HyDE) via vLLM Manager (Gemma-3-12b-it).
+Geracao de N rodadas de documentos hipotetricos (HyDE) via vLLM Manager.
 
 Fluxo:
-  1. Le as queries de data/queries/queries.json
-  2. Para cada query qi, chama o InstructGPT(Gemma-12b) para gerar documento juridico hipotetico hi
-  3. Salva em data/hyde_docs/hyde_docs.json (pre-gerado e estatico = reprodutibilidade)
+  Para cada rodada n in 1..N_ROUNDS:
+    Para cada query qi:
+      hi_n = LLM_hyde(qi)   com T=0.7
 
-O arquivo espelha a estrutura do queries.json adicionando o campo "hyde_doc".
+  Saida: data/hyde_docs/hyde_docs_{n}.json  (n = 01, 02, ..., 10)
+
+Cada arquivo espelha queries.json adicionando o campo "hyde_doc".
+Rodadas sao independentes — o LLM recebe o mesmo prompt mas com T=0.7,
+garantindo variabilidade entre documentos para o averaging de embeddings.
 """
 
 from __future__ import annotations
 
 import json
+import os
 import time
 from pathlib import Path
 
@@ -24,29 +29,16 @@ from src.assets import (
     VLLM_BASE_URL,
     DEFAULT_MODEL,
     LLM_AGENT_TIMEOUT,
-    LLM_TEMPERATURE,
     QUERIES_PATH,
 )
 
-# -- Configuracoes HyDE --------------------------------------------------------
+# -- Configuracoes -------------------------------------------------------------
 HYDE_DOCS_DIR   = Path("data/hyde_docs")
-HYDE_DOCS_PATH  = HYDE_DOCS_DIR / "hyde_docs.json"
-HYDE_MAX_TOKENS = 500
-RETRY_ATTEMPTS  = 3
-RETRY_DELAY     = 5   # segundos entre tentativas
-
-# -- Cliente vLLM --------------------------------------------------------------
-
-def _get_client() -> OpenAI:
-    import os
-    api_key = os.environ.get("VLLM_TOKEN")
-    return OpenAI(
-        base_url=VLLM_BASE_URL,
-        api_key=api_key,
-        timeout=LLM_AGENT_TIMEOUT,
-    )
-
-# -- Prompt HyDE ---------------------------------------------------------------
+N_ROUNDS        = 15
+HYDE_TEMPERATURE = 0.7   # variabilidade alta = melhor cobertura no averaging
+HYDE_MAX_TOKENS  = 500
+RETRY_ATTEMPTS   = 3
+RETRY_DELAY      = 5
 
 HYDE_SYSTEM_PROMPT = (
     "Voce e um assistente juridico especializado em jurisprudencia brasileira. "
@@ -58,7 +50,17 @@ HYDE_SYSTEM_PROMPT = (
     "(5) responder APENAS com o texto da ementa, sem introducoes ou explicacoes."
 )
 
-def _build_hyde_prompt(query: str) -> str:
+
+def _get_client() -> OpenAI:
+    api_key = os.environ.get("VLLM_TOKEN")
+    return OpenAI(base_url=VLLM_BASE_URL, api_key=api_key, timeout=LLM_AGENT_TIMEOUT)
+
+
+def _hyde_path(n: int) -> Path:
+    return HYDE_DOCS_DIR / f"hyde_docs_{n:02d}.json"
+
+
+def _build_prompt(query: str) -> str:
     return (
         "Com base no resumo abaixo, gere uma ementa juridica hipotetica completa "
         "e tecnicamente precisa:\n\n"
@@ -66,180 +68,130 @@ def _build_hyde_prompt(query: str) -> str:
         "EMENTA HIPOTETICA:"
     )
 
-# -- Geracao de um documento (com retry) ---------------------------------------
 
-def generate_hyde_doc(query: str, client: OpenAI) -> str | None:
-    """
-    Gera documento hipotetico hi a partir da query qi.
-    Retorna o texto ou None apos todas as tentativas falharem.
-    """
-    prompt = _build_hyde_prompt(query)
-
+def _generate_one(query: str, client: OpenAI) -> str | None:
     for attempt in range(1, RETRY_ATTEMPTS + 1):
         try:
-            response = client.chat.completions.create(
+            resp = client.chat.completions.create(
                 model=DEFAULT_MODEL,
                 messages=[
                     {"role": "system", "content": HYDE_SYSTEM_PROMPT},
-                    {"role": "user",   "content": prompt},
+                    {"role": "user",   "content": _build_prompt(query)},
                 ],
-                temperature=LLM_TEMPERATURE,
+                temperature=HYDE_TEMPERATURE,
                 max_tokens=HYDE_MAX_TOKENS,
             )
-            return response.choices[0].message.content.strip()
-
+            return resp.choices[0].message.content.strip()
         except Exception as e:
-            print(f"[hyde] Tentativa {attempt}/{RETRY_ATTEMPTS} falhou: {e}")
+            print(f"[hyde] tentativa {attempt}/{RETRY_ATTEMPTS} falhou: {e}")
             if attempt < RETRY_ATTEMPTS:
                 time.sleep(RETRY_DELAY)
-
     return None
 
-# -- Geracao em lote com checkpoint --------------------------------------------
 
-def generate_all_hyde_docs(resume: bool = True) -> list[dict]:
+def generate_round(n: int, resume: bool = True) -> list[dict]:
     """
-    Gera documentos hipotetricos para todas as queries.
+    Gera a rodada n (1-based) de documentos hipotetricos.
+    Salva em data/hyde_docs/hyde_docs_{n:02d}.json.
 
     Args:
-        resume : se True, pula queries ja geradas no arquivo de saida
-                 (permite retomar apos interrupcao sem reprocessar)
-
-    Retorna lista de dicts com todos os campos originais + "hyde_doc".
+        n      : numero da rodada (1 a N_ROUNDS)
+        resume : pula registros ja gerados no arquivo de saida
     """
     HYDE_DOCS_DIR.mkdir(parents=True, exist_ok=True)
+    out_path = _hyde_path(n)
 
     with open(QUERIES_PATH, "r", encoding="utf-8") as f:
         queries = json.load(f)
 
-    # Carrega progresso anterior
     existing: dict[str, str] = {}
-    if resume and HYDE_DOCS_PATH.exists():
-        with open(HYDE_DOCS_PATH, "r", encoding="utf-8") as f:
+    if resume and out_path.exists():
+        with open(out_path, "r", encoding="utf-8") as f:
             saved = json.load(f)
         existing = {
             item["cdacordao"]: item["hyde_doc"]
             for item in saved
             if item.get("hyde_doc")
         }
-        print(f"[hyde] Retomando: {len(existing)}/{len(queries)} ja gerados")
+        print(f"[hyde] rodada {n:02d}: retomando — {len(existing)}/{len(queries)} ja gerados")
 
     client  = _get_client()
     results = []
     failed  = 0
 
-    for item in tqdm(queries, desc="Gerando docs HyDE", unit="doc"):
-        cdacordao = item["cdacordao"]
-        record    = {**item}
+    for item in tqdm(queries, desc=f"Rodada {n:02d}", unit="doc"):
+        cdac   = item["cdacordao"]
+        record = {**item}
 
-        if cdacordao in existing:
-            record["hyde_doc"] = existing[cdacordao]
+        if cdac in existing:
+            record["hyde_doc"] = existing[cdac]
             results.append(record)
             continue
 
-        hyde_doc = generate_hyde_doc(item["query"], client)
-
-        if hyde_doc:
-            record["hyde_doc"] = hyde_doc
+        doc = _generate_one(item["query"], client)
+        if doc:
+            record["hyde_doc"] = doc
         else:
-            print(f"[hyde] FALHA cdacordao={cdacordao} — registrado como null")
+            print(f"[hyde] FALHA cdacordao={cdac} rodada={n:02d}")
             record["hyde_doc"] = None
             failed += 1
 
         results.append(record)
-
-        # Checkpoint a cada 10 documentos
         if len(results) % 10 == 0:
-            _save(results)
+            _save(results, out_path)
 
-    _save(results)
-
-    total   = len(results)
-    success = total - failed
-    print(f"[hyde] Concluido: {success}/{total} gerados com sucesso")
-    if failed:
-        print(f"[hyde] ATENCAO: {failed} falhas — verifique registros hyde_doc=null")
-
+    _save(results, out_path)
+    print(f"[hyde] rodada {n:02d} concluida — {len(results)-failed}/{len(results)} ok")
     return results
 
-def generate_ONE_hyde_docs(resume: bool = True) -> list[dict]:
-    """
-    Gera UM documento hipotetrico para determinada query.
 
-    Args:
-        resume : se True, pula queries ja geradas no arquivo de saida
-                 (permite retomar apos interrupcao sem reprocessar)
+def generate_all_rounds(resume: bool = True) -> None:
+    """Gera todas as N_ROUNDS rodadas sequencialmente."""
+    print(f"[hyde] Gerando {N_ROUNDS} rodadas de documentos hipotetricos (T={HYDE_TEMPERATURE})")
+    for n in range(1, N_ROUNDS + 1):
+        generate_round(n, resume=resume)
+    print(f"[hyde] Todas as {N_ROUNDS} rodadas concluidas em {HYDE_DOCS_DIR}")
 
-    Retorna lista de dicts com todos os campos originais + "hyde_doc".
-    """
-    HYDE_DOCS_DIR.mkdir(parents=True, exist_ok=True)
 
-    with open(QUERIES_PATH, "r", encoding="utf-8") as f:
-        queries = json.load(f)
-
-    client  = _get_client()
-    results = []
-    failed  = 0
-    
-    item = queries[0]
-
-    cdacordao = item["cdacordao"]
-    proc_id = item["numero_processo"]
-    record    = {**item}
-
-    hyde_doc = generate_hyde_doc(item["query"], client)
-
-    if hyde_doc:
-        record["hyde_doc"] = hyde_doc
-    else:
-        print(f"[hyde] FALHA cdacordao={cdacordao} — registrado como null")
-        record["hyde_doc"] = None
-        failed += 1
-
-    results.append(record)
-
-    _save(results)
-
-    print(f"[hyde] Concluido: Processo  {proc_id} gerado com sucesso")
-    if failed:
-        print(f"[hyde] ATENCAO: {failed} falhas — verifique registros hyde_doc=null")
-
-    return results
-
-def _save(results: list[dict]) -> None:
-    with open(HYDE_DOCS_PATH, "w", encoding="utf-8") as f:
+def _save(results: list[dict], path: Path) -> None:
+    with open(path, "w", encoding="utf-8") as f:
         json.dump(results, f, ensure_ascii=False, indent=2)
 
 
-def load_hyde_docs() -> list[dict]:
+def load_round(n: int) -> list[dict]:
     """
-    Carrega documentos hipotéticos pre-gerados do disco.
+    Carrega rodada n do disco.
 
     Raises:
-        FileNotFoundError : arquivo nao encontrado (rode generate_all_hyde_docs primeiro)
-        ValueError        : registros com hyde_doc=None encontrados
+        FileNotFoundError : arquivo nao gerado ainda
+        ValueError        : registros com hyde_doc=None
     """
-    if not HYDE_DOCS_PATH.exists():
+    path = _hyde_path(n)
+    if not path.exists():
         raise FileNotFoundError(
-            f"Arquivo HyDE nao encontrado: {HYDE_DOCS_PATH}\n"
-            "Execute: python -m src.hyde"
+            f"Rodada {n:02d} nao encontrada: {path}\n"
+            f"Execute: python -m src.hyde"
         )
-
-    with open(HYDE_DOCS_PATH, "r", encoding="utf-8") as f:
+    with open(path, "r", encoding="utf-8") as f:
         docs = json.load(f)
-
     failed = [d["cdacordao"] for d in docs if not d.get("hyde_doc")]
     if failed:
         raise ValueError(
-            f"{len(failed)} documentos com hyde_doc=None: {failed[:5]}"
-            f"{'...' if len(failed) > 5 else ''}\n"
-            "Regere os documentos faltantes antes de prosseguir."
+            f"Rodada {n:02d}: {len(failed)} hyde_doc=None — "
+            f"{failed[:3]}{'...' if len(failed) > 3 else ''}"
         )
-
     return docs
 
 
+def load_all_rounds() -> list[list[dict]]:
+    """Carrega todas as N_ROUNDS rodadas. Retorna lista de N_ROUNDS listas."""
+    return [load_round(n) for n in range(1, N_ROUNDS + 1)]
+
+
 if __name__ == "__main__":
-    print("=== Geracao de documentos HyDE ===")
-    docs = generate_all_hyde_docs(resume=True)
-    print(f"Salvo em {HYDE_DOCS_PATH}: {len(docs)} documentos")
+    print(f"[hyde] Iniciando HyDE timer...")
+    start = time.time()
+    generate_all_rounds(resume=True)
+    end = time.time()
+    tempo = end-start
+    print(f"[hyde] Tempo de Geração: {(tempo)/3600:.2f}h ({(tempo)/60:.2f}min | {tempo:.2f}s)")

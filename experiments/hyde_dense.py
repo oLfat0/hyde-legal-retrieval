@@ -1,16 +1,17 @@
 """
 hyde_dense.py
 -------------
-Experimento 2: HyDE + Dense Retrieval
+Experimento 2: HyDE + Dense Retrieval (multi-round averaging)
 
-Estrategia de representacao : embedding do documento hipotetico
-    hi     = LLM_hyde(qi)
-    vi_hyde = f(hi)
+Representacao da query:
+    Para cada rodada n: hi_n = LLM_hyde(qi)
+    vi_hyde = L2_normalize( mean(f(h^1_i), ..., f(h^10_i)) )
 
-Estrategia de recuperacao   : busca densa (FAISS IndexFlatIP)
-    R_dense = sort(sim(vi_hyde, ej))
+Recuperacao: busca densa (FAISS IndexFlatIP)
 
-PRE-REQUISITO: rodar src/hyde.py para gerar data/hyde_docs/hyde_docs.json
+PRE-REQUISITOS (nesta ordem):
+  1. python -m src.hyde              -> gera hyde_docs_{01..10}.json
+  2. python -m src.hyde_embedder     -> gera hyde_embeds_{01..10}.npy + mean.npy
 
 Saida: results/hyde_dense.json
 """
@@ -23,62 +24,55 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from src import embedder, evaluator, hyde
+from src import embedder, evaluator, hyde_embedder
+from src.assets import QUERIES_PATH
 
-# -- Configuracoes do experimento ----------------------------------------------
 CONFIG_NAME = "hyde_dense"
 TOP_K       = 10
 KS          = [1, 5, 10]
 
 
 def run() -> dict:
-    """Executa o experimento HyDE + Dense Retrieval."""
-
     print(f"\n{'#'*55}")
     print(f"  Experimento: {CONFIG_NAME}")
-    print(f"  Representacao : embedding do documento hipotetico (HyDE)")
+    print(f"  Representacao : media de {hyde_embedder.hyde_module.N_ROUNDS} embeddings HyDE (T=0.7)")
     print(f"  Recuperacao   : Dense Retrieval (FAISS)")
     print(f"{'#'*55}\n")
 
-    # 1. Carrega documentos HyDE pre-gerados
-    print("[hyde_dense] Carregando documentos hipotéticos pre-gerados...")
-    hyde_docs = hyde.load_hyde_docs()
-    print(f"[hyde_dense] {len(hyde_docs)} documentos HyDE carregados")
+    # 1. Carrega embeddings medios pre-computados
+    print("[hyde_dense] Carregando embeddings medios HyDE...")
+    mean_embeddings, cdacordao_hyde_order = hyde_embedder.run_full_pipeline()
+    print(f"[hyde_dense] mean_embeddings shape: {mean_embeddings.shape}")
 
-    hyde_texts   = [doc["hyde_doc"]  for doc in hyde_docs]
-    relevant_ids = [doc["cdacordao"] for doc in hyde_docs]
+    # 2. Carrega queries para obter relevant_ids na mesma ordem
+    with open(QUERIES_PATH, "r", encoding="utf-8") as f:
+        queries = json.load(f)
 
-    # 2. Carrega modelo e indice
-    #    O mesmo indice do baseline_dense e reutilizado (build_index retorna do cache)
+    # Garante que a ordem dos cdacordao bate entre hyde_embedder e queries
+    query_cdac_set = {q["cdacordao"] for q in queries}
+    assert set(cdacordao_hyde_order) == query_cdac_set, (
+        "ERRO: cdacordao nos embeddings HyDE divergem das queries!"
+    )
+
+    # relevant_ids na mesma ordem do hyde_embedder (posicao = linha no array)
+    relevant_ids = cdacordao_hyde_order
+
+    # 3. Carrega indice FAISS (reutiliza cache de baseline_dense)
     model, tokenizer = embedder.load_model()
     index, cdacordao_list = embedder.build_index(model, tokenizer)
 
-    # 3. Computa embeddings dos documentos hipotetricos (vi_hyde = f(hi))
-    print("[hyde_dense] Computando embeddings dos documentos hipotéticos...")
-    hyde_embeddings = embedder.encode_texts(
-        hyde_texts,
-        model,
-        tokenizer,
-        desc="Encoding HyDE docs",
-    )
-
-    # 4. Busca densa com vi_hyde
+    # 4. Dense retrieval com embedding medio
     print(f"[hyde_dense] Executando dense retrieval (top-{TOP_K})...")
     rankings = embedder.dense_search(
-        hyde_embeddings,
-        index,
-        cdacordao_list,
-        top_k=TOP_K,
+        mean_embeddings, index, cdacordao_list, top_k=TOP_K
     )
 
     # 5. Avaliacao
     print("[hyde_dense] Calculando metricas...")
     results = evaluator.evaluate(rankings, relevant_ids, ks=KS)
 
-    # 6. Exibe e salva
     evaluator.print_results(results, CONFIG_NAME)
     evaluator.save_results(results, CONFIG_NAME)
-
     return results
 
 
