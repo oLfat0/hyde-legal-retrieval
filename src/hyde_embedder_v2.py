@@ -1,7 +1,7 @@
 """
 hyde_embedder_v2.py
 -------------------
-Computa embeddings das ementas hipotetrias (HyDE v2) e calcula a media.
+Computa embeddings das ementas hipotéticas (HyDE v2) e calcula a média.
 
 Estrutura gerada:
   data/hyde_v2_embeds/

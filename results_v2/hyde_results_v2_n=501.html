@@ -1,0 +1,142 @@
+
+<h2 class="sr-only">Resultados experimentos v2 com 501 documentos: comparação entre Baseline e HyDE em Dense e Hybrid Retrieval</h2>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans)}
+.wrap{padding:1rem 0 2rem}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:1.5rem;font-size:12px;color:var(--color-text-secondary)}
+.legend span{display:flex;align-items:center;gap:5px}
+.legend i{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+.st{font-size:14px;font-weight:500;color:var(--color-text-primary);margin:1.5rem 0 .5rem}
+.ch{position:relative;width:100%;height:260px;margin-bottom:.5rem}
+.ch-sm{position:relative;width:100%;height:180px;margin-bottom:.5rem}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:1rem 0}
+.card{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:10px 12px;border-top:3px solid transparent}
+.cl{font-size:11px;color:var(--color-text-secondary);margin-bottom:2px}
+.cv{font-size:20px;font-weight:500;color:var(--color-text-primary)}
+.cs{font-size:11px;color:var(--color-text-secondary);margin-top:2px}
+.note{background:var(--color-background-secondary);border-left:3px solid #378ADD;border-radius:0 var(--border-radius-md) var(--border-radius-md) 0;padding:10px 14px;font-size:13px;color:var(--color-text-secondary);margin-top:1.5rem;line-height:1.6}
+</style>
+
+<div class="wrap">
+<div class="legend">
+  <span><i style="background:#378ADD"></i>Baseline + Dense</span>
+  <span><i style="background:#7F77DD"></i>HyDE + Dense (avg 5)</span>
+  <span><i style="background:#1D9E75"></i>Baseline + Hybrid</span>
+  <span><i style="background:#EF9F27"></i>HyDE + Hybrid (avg 5)</span>
+</div>
+
+<p class="st">Docs encontrados no top-10 (de 501)</p>
+<div class="cards">
+  <div class="card" style="border-top-color:#378ADD">
+    <div class="cl">Baseline + Dense</div>
+    <div class="cv">134</div>
+    <div class="cs">26.7% de cobertura</div>
+  </div>
+  <div class="card" style="border-top-color:#7F77DD">
+    <div class="cl">HyDE + Dense</div>
+    <div class="cv">310</div>
+    <div class="cs">61.9% de cobertura</div>
+  </div>
+  <div class="card" style="border-top-color:#1D9E75">
+    <div class="cl">Baseline + Hybrid</div>
+    <div class="cv">325</div>
+    <div class="cs">64.9% de cobertura</div>
+  </div>
+  <div class="card" style="border-top-color:#EF9F27">
+    <div class="cl">HyDE + Hybrid</div>
+    <div class="cv">367</div>
+    <div class="cs">73.3% de cobertura</div>
+  </div>
+</div>
+
+<p class="st">Cobertura (% docs encontrados no top-10)</p>
+<div class="ch-sm">
+  <canvas id="c0" role="img" aria-label="Gráfico de barras com percentual de documentos encontrados no top-10. Baseline Dense 26.7%, HyDE Dense 61.9%, Baseline Hybrid 64.9%, HyDE Hybrid 73.3%.">
+    Baseline Dense 26.7%, HyDE Dense 61.9%, Baseline Hybrid 64.9%, HyDE Hybrid 73.3%.
+  </canvas>
+</div>
+
+<p class="st">Recall@k</p>
+<div class="ch">
+  <canvas id="c1" role="img" aria-label="Recall@1, @5 e @10 para 4 configurações. HyDE Hybrid lidera com R@1=0.48, R@5=0.67, R@10=0.73.">
+    Recall@1: BL Dense 0.086, HyDE Dense 0.345, BL Hybrid 0.176, HyDE Hybrid 0.483.
+  </canvas>
+</div>
+
+<p class="st">MRR e nDCG@10</p>
+<div class="ch">
+  <canvas id="c2" role="img" aria-label="MRR e nDCG@10. HyDE Hybrid: MRR=0.571, nDCG@10=0.610.">
+    MRR: BL Dense 0.131, HyDE Dense 0.427, BL Hybrid 0.307, HyDE Hybrid 0.571.
+  </canvas>
+</div>
+
+<div class="note">
+  <strong>Destaque:</strong> o HyDE+Dense sozinho já encontra 310 docs (61.9%) vs 134 (26.7%) do Baseline+Dense — 2.3× mais cobertura apenas pela expansão semântica. O HyDE+Hybrid chega a 367 docs (73.3%), combinando cobertura semântica e lexical via RRF.
+</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const CFGS=[
+  {label:'Baseline+Dense',  color:'#378ADD',border:'#185FA5'},
+  {label:'HyDE+Dense',      color:'#7F77DD',border:'#534AB7'},
+  {label:'Baseline+Hybrid', color:'#1D9E75',border:'#0F6E56'},
+  {label:'HyDE+Hybrid',     color:'#EF9F27',border:'#BA7517'},
+];
+const D={
+  bl_d:{r1:.0858,r5:.1916,r10:.2675,mrr:.1313,ndcg10:.1630,cov:26.7},
+  hd  :{r1:.3453,r5:.5449,r10:.6188,mrr:.4267,ndcg10:.4726,cov:61.9},
+  bl_h:{r1:.1756,r5:.4990,r10:.6487,mrr:.3065,ndcg10:.3877,cov:64.9},
+  hh  :{r1:.4830,r5:.6747,r10:.7325,mrr:.5710,ndcg10:.6103,cov:73.3},
+};
+const KEYS=['bl_d','hd','bl_h','hh'];
+function mkDS(fields){
+  return CFGS.map((c,i)=>({
+    label:c.label,
+    data:fields.map(f=>D[KEYS[i]][f]),
+    backgroundColor:c.color+'CC',
+    borderColor:c.border,
+    borderWidth:1,
+  }));
+}
+
+new Chart(document.getElementById('c0'),{
+  type:'bar',
+  data:{
+    labels:['Baseline+Dense','HyDE+Dense','Baseline+Hybrid','HyDE+Hybrid'],
+    datasets:[{
+      label:'Cobertura (%)',
+      data:[26.7,61.9,64.9,73.3],
+      backgroundColor:CFGS.map(c=>c.color+'CC'),
+      borderColor:CFGS.map(c=>c.border),
+      borderWidth:1,
+    }]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},
+      datalabels:{display:false},
+      tooltip:{callbacks:{label:ctx=>`${ctx.raw.toFixed(1)}%  (${[134,310,325,367][ctx.dataIndex]} docs)`}}
+    },
+    scales:{
+      y:{min:0,max:100,ticks:{callback:v=>v+'%'}},
+      x:{ticks:{autoSkip:false}}
+    }
+  }
+});
+
+new Chart(document.getElementById('c1'),{
+  type:'bar',
+  data:{labels:['Recall@1','Recall@5','Recall@10'],datasets:mkDS(['r1','r5','r10'])},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+    scales:{y:{min:0,max:1,ticks:{callback:v=>v.toFixed(2)}}}}
+});
+
+new Chart(document.getElementById('c2'),{
+  type:'bar',
+  data:{labels:['MRR','nDCG@10'],datasets:mkDS(['mrr','ndcg10'])},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+    scales:{y:{min:0,max:1,ticks:{callback:v=>v.toFixed(2)}}}}
+});
+</script>

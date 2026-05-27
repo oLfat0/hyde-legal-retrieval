@@ -11,6 +11,23 @@ e gera:
 No v2:
   corpus = ementa     (palavras-chave — o que indexamos no FAISS)
   query  = descricao  (texto completo do processo — o que buscamos)
+
+Ordem de execução par ao experimento:
+
+# 0. Prepara queries_v2.json a partir do novo corpus
+python -m src.prepare_v2
+
+# 1. Gera 5 rodadas de ementas hipotéticas
+python -m src.hyde_v2
+
+# 2. Computa embeddings + média
+python -m src.hyde_embedder_v2
+
+# 3. Roda os 4 experimentos
+python experiments_v2/baseline_dense_v2.py      -> Aqui que o Índice FAISS é criado
+python experiments_v2/hyde_dense_v2.py
+python experiments_v2/baseline_hybrid_v2.py     -> Aqui que o Índice BM25 é criado
+python experiments_v2/hyde_hybrid_v2.py
 """
 
 from __future__ import annotations

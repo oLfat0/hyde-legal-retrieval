@@ -40,7 +40,7 @@ RETRY_ATTEMPTS = 3
 RETRY_DELAY    = 5
 
 # -- Prompt HyDE v2 ------------------------------------------------------------
-# Objetivo: gerar uma EMENTA (palavras-chave) a partir da descricao do processo.
+# Objetivo: gerar uma EMENTA (sequência de palavras-chave) a partir da descricao do processo.
 # O modelo deve imitar o formato compacto das ementas do TJMS:
 #   "AREA DO DIREITO. TEMA PRINCIPAL. SUBTEMA. RESULTADO."
 
