@@ -54,6 +54,12 @@ def reciprocal_rank(rank: int | None) -> float:
 
 def ndcg_at_k(rank: int | None, k: int) -> float:
     """
+    ...
+    Args:
+        rank : posição (1-based) onde o documento relevante foi encontrado no ranking. None se ausente.
+        k    : janela de avaliação(tamanho da lista de elementos analisados) — posições além de k são 
+               ignoradas (tratadas como não encontradas).
+
     (nDCG -> Normalize Discounted Cumulative Gain)
     DCG = Σ_i Relevância_i/log2(rank_i+1)
 
