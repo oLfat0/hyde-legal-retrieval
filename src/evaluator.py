@@ -54,10 +54,30 @@ def reciprocal_rank(rank: int | None) -> float:
 
 def ndcg_at_k(rank: int | None, k: int) -> float:
     """
+    (nDCG -> Normalize Discounted Cumulative Gain)
+    DCG = Σ_i Relevância_i/log2(rank_i+1)
+
+    É uma métrica que penaliza um documento de GRANDE relevância quando este se encontra em uma POSIÇÃO
+    LONGE do topo de seu ranking.
+
+    Caso haja um documento de GRANDE relevância mas que se encontra em uma posição muito LONGE do TOPO
+    do ranking, sua pontuação final será descontada, pois, quanto maior a relevância de determinado documento, 
+    mais pontos ele vai receber (Relevância se encontra no numerador) mas, quanto maior sua distância, a sua
+    pontuação vai caindo drásticamente por estar longe das primeiras posições da lista do ranking 
+    (Distância se encontra no denominador)
+
+    É usado log2 no denominador referente à posição por ser altamente consistente e estável, penalizando
+    facilmente um alto valor de relevância quando ele se encontra em uma posição desfavorável em grandes
+    listas de documentos
+
+    Como estamos usando métricas binárias, a relevância de um documento pode possuir apenas 2 valores:
+        ¬ 1, no caso de ser altamente Relevante
+        ¬ 0, no caso de ser totalmente Irrelevante
+
     nDCG@k para um unico documento relevante (relevancia binaria = 1).
 
-    DCG  = 1 / log2(rank + 1)  se rank <= k, senao 0
-    IDCG = 1 / log2(1 + 1) = 1   (doc relevante sempre na posicao 1 no ideal)
+    DCG  = 1 / log2(rank + 1)  se rank <= k, senao 0 ()
+    IDCG = 1 / log2(1 + 1) = 1   (como esse é o rank IDEAL, o doc MAIS relevante sempre na posicao 1 no ideal)
     nDCG = DCG / IDCG = DCG
     """
     if rank is None or rank > k:
