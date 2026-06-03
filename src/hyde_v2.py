@@ -34,6 +34,7 @@ from src.assets_v2 import (
     HYDE_N_ROUNDS,
     QUERIES_V2_PATH,
     HYDE_V2_DOCS_DIR,
+    HYDE_QWEN_DOCS_DIR,
 )
 
 RETRY_ATTEMPTS = 3
@@ -66,7 +67,7 @@ def _build_prompt(descricao: str) -> str:
 
 
 def _get_client() -> OpenAI:
-    api_key = os.environ.get("VLLM_TOKEN")
+    api_key = os.environ.get("TOKEN_VLLM")
     return OpenAI(base_url=VLLM_BASE_URL, api_key=api_key, timeout=LLM_AGENT_TIMEOUT)
 
 
@@ -92,6 +93,9 @@ def _generate_one(descricao: str, client: OpenAI) -> str | None:
 
 def _hyde_path(n: int) -> Path:
     return Path(HYDE_V2_DOCS_DIR) / f"hyde_v2_docs_{n:02d}.json"
+
+def _hyde_qwen_path(n: int) -> Path:
+    return Path(HYDE_QWEN_DOCS_DIR) / f"hyde_qwen_docs_{n:02d}.json"
 
 
 def _save(results: list[dict], path: Path) -> None:
@@ -158,24 +162,87 @@ def generate_all_rounds(resume: bool = True) -> None:
     print(f"[hyde_v2] Concluido — arquivos em {HYDE_V2_DOCS_DIR}")
 
 
-def load_round(n: int) -> list[dict]:
-    path = _hyde_path(n)
+def generate_round_qwen(n: int, resume: bool = True) -> list[dict]:
+    """
+    Gera a rodada n de ementas hipotéticas com o modelo Qwen.
+    Processa apenas as primeiras 50 queries.
+    """
+    Path(HYDE_QWEN_DOCS_DIR).mkdir(parents=True, exist_ok=True)
+    out_path = _hyde_qwen_path(n)
+
+    with open(QUERIES_V2_PATH, "r", encoding="utf-8") as f:
+        queries = json.load(f)[:50]
+
+    existing: dict[str, str] = {}
+    if resume and out_path.exists():
+        with open(out_path, "r", encoding="utf-8") as f:
+            saved = json.load(f)
+        existing = {
+            item["cdacordao"]: item["hyde_ementa"]
+            for item in saved
+            if item.get("hyde_ementa")
+        }
+        print(f"[hyde_qwen] rodada {n:02d}: retomando — {len(existing)}/{len(queries)} prontos")
+
+    client  = _get_client()
+    results = []
+    failed  = 0
+
+    for item in tqdm(queries, desc=f"HyDE Qwen rodada {n:02d}", unit="doc"):
+        cdac   = item["cdacordao"]
+        record = {**item}
+
+        if cdac in existing:
+            record["hyde_ementa"] = existing[cdac]
+            results.append(record)
+            continue
+
+        hyde_ementa = _generate_one(item["query"], client)
+        if hyde_ementa:
+            record["hyde_ementa"] = hyde_ementa
+        else:
+            print(f"[hyde_qwen] FALHA cdacordao={cdac} rodada={n:02d}")
+            record["hyde_ementa"] = None
+            failed += 1
+
+        results.append(record)
+        if len(results) % 10 == 0:
+            _save(results, out_path)
+
+    _save(results, out_path)
+    print(f"[hyde_qwen] rodada {n:02d} concluida — {len(results)-failed}/{len(results)} ok")
+    return results
+
+
+def generate_all_rounds_qwen(resume: bool = True) -> None:
+    print(f"[hyde_qwen] Gerando {HYDE_N_ROUNDS} rodadas de ementas hipotéticas Qwen (T={HYDE_TEMPERATURE})")
+    for n in range(1, HYDE_N_ROUNDS + 1):
+        generate_round_qwen(n, resume=resume)
+    print(f"[hyde_qwen] Concluido — arquivos em {HYDE_QWEN_DOCS_DIR}")
+
+
+def load_round_qwen(n: int) -> list[dict]:
+    path = _hyde_qwen_path(n)
     if not path.exists():
         raise FileNotFoundError(
-            f"Rodada {n:02d} nao encontrada: {path}\n"
+            f"Rodada Qwen {n:02d} nao encontrada: {path}\n"
             "Execute: python -m src.hyde_v2"
         )
     with open(path, "r", encoding="utf-8") as f:
         docs = json.load(f)
     failed = [d["cdacordao"] for d in docs if not d.get("hyde_ementa")]
     if failed:
-        raise ValueError(f"Rodada {n:02d}: {len(failed)} hyde_ementa=None — {failed[:3]}")
+        raise ValueError(f"Rodada Qwen {n:02d}: {len(failed)} hyde_ementa=None — {failed[:3]}")
     return docs
 
 
-def load_all_rounds() -> list[list[dict]]:
-    return [load_round(n) for n in range(1, HYDE_N_ROUNDS + 1)]
+# def load_all_rounds() -> list[list[dict]]:
+#     return [load_round(n) for n in range(1, HYDE_N_ROUNDS + 1)]
+
+
+def load_all_rounds_qwen() -> list[list[dict]]:
+    return [load_round_qwen(n) for n in range(1, HYDE_N_ROUNDS + 1)]
 
 
 if __name__ == "__main__":
-    generate_all_rounds(resume=True)
+    generate_all_rounds_qwen(resume=True)

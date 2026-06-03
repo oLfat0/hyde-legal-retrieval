@@ -1,5 +1,5 @@
-VLLM_BASE_URL      = "https://llm.liaufms.org/v1/gemma-3-12b-it"
-DEFAULT_MODEL      = "google/gemma-3-12b-it"
+VLLM_BASE_URL      = "https://llm.liaufms.org/v1/qwen2-5-14b-instruct-awq/"
+DEFAULT_MODEL      = "Qwen/Qwen2.5-14B-Instruct-AWQ"
 LLM_AGENT_TIMEOUT  = 120
 HYDE_TEMPERATURE   = 0.7
 HYDE_MAX_TOKENS    = 200
@@ -11,3 +11,7 @@ BM25_V2_DIR        = "data/bm25_index_v2"
 HYDE_V2_DOCS_DIR   = "data/hyde_v2_docs"
 HYDE_V2_EMBEDS_DIR = "data/hyde_v2_embeds"
 RESULTS_V2_DIR     = "results_v2"
+
+HYDE_QWEN_DOCS_DIR   = "data/hyde_qwen_docs"
+HYDE_QWEN_EMBEDS_DIR = "data/hyde_qwen_embeds"
+RESULTS_QWEN_DIR     = "results_qwen"

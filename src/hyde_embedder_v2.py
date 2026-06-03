@@ -20,7 +20,7 @@ from pathlib import Path
 import numpy as np
 
 from src import hyde_v2 as hyde_module
-from src.assets_v2 import HYDE_V2_EMBEDS_DIR, HYDE_N_ROUNDS
+from src.assets_v2 import HYDE_V2_EMBEDS_DIR, HYDE_N_ROUNDS, HYDE_QWEN_EMBEDS_DIR
 from src.embedder_v2 import encode_texts, load_model
 
 EMBEDS_DIR  = Path(HYDE_V2_EMBEDS_DIR)
@@ -108,6 +108,90 @@ def run_full_pipeline(force_recompute: bool = False) -> tuple[np.ndarray, list[s
     return mean_embeddings, cdacordao_order
 
 
+# -- Pipeline Qwen (50 queries) ------------------------------------------------
+
+QWEN_EMBEDS_DIR = Path(HYDE_QWEN_EMBEDS_DIR)
+QWEN_MEAN_PATH  = QWEN_EMBEDS_DIR / "hyde_qwen_embeds_mean.npy"
+QWEN_META_PATH  = QWEN_EMBEDS_DIR / "hyde_qwen_embeds_meta.json"
+
+
+def _qwen_embed_path(n: int) -> Path:
+    return QWEN_EMBEDS_DIR / f"hyde_qwen_embeds_{n:02d}.npy"
+
+
+def compute_round_embeddings_qwen(n: int, force_recompute: bool = False) -> np.ndarray:
+    QWEN_EMBEDS_DIR.mkdir(parents=True, exist_ok=True)
+    out_path = _qwen_embed_path(n)
+
+    if not force_recompute and out_path.exists():
+        print(f"[hyde_embedder_qwen] rodada {n:02d}: carregando do disco")
+        return np.load(out_path)
+
+    print(f"[hyde_embedder_qwen] rodada {n:02d}: computando embeddings...")
+    docs = hyde_module.load_round_qwen(n)
+
+    hyde_texts     = [d["hyde_ementa"] for d in docs]
+    cdacordao_list = [d["cdacordao"]   for d in docs]
+
+    if n == 1:
+        with open(QWEN_META_PATH, "w", encoding="utf-8") as f:
+            json.dump({"cdacordao_order": cdacordao_list}, f, ensure_ascii=False, indent=2)
+
+    model, tokenizer = load_model()
+    embeddings = encode_texts(hyde_texts, model, tokenizer, desc=f"Enc Qwen rodada {n:02d}")
+
+    np.save(out_path, embeddings)
+    print(f"[hyde_embedder_qwen] rodada {n:02d}: salvo {embeddings.shape}")
+    return embeddings
+
+
+def compute_all_round_embeddings_qwen(force_recompute: bool = False) -> list[np.ndarray]:
+    return [
+        compute_round_embeddings_qwen(n, force_recompute=force_recompute)
+        for n in range(1, HYDE_N_ROUNDS + 1)
+    ]
+
+
+def compute_mean_embeddings_qwen(
+    all_embeddings: list[np.ndarray] | None = None,
+    force_recompute: bool = False,
+) -> np.ndarray:
+    QWEN_EMBEDS_DIR.mkdir(parents=True, exist_ok=True)
+
+    if not force_recompute and QWEN_MEAN_PATH.exists():
+        print(f"[hyde_embedder_qwen] media em disco — carregando")
+        return np.load(QWEN_MEAN_PATH)
+
+    if all_embeddings is None:
+        all_embeddings = [np.load(_qwen_embed_path(n)) for n in range(1, HYDE_N_ROUNDS + 1)]
+
+    stacked  = np.stack(all_embeddings, axis=0)
+    mean_emb = stacked.mean(axis=0)
+    norms    = np.linalg.norm(mean_emb, axis=1, keepdims=True).clip(min=1e-9)
+    mean_emb = (mean_emb / norms).astype(np.float32)
+
+    np.save(QWEN_MEAN_PATH, mean_emb)
+    print(f"[hyde_embedder_qwen] media salva: {mean_emb.shape}")
+    return mean_emb
+
+
+def load_meta_qwen() -> list[str]:
+    if not QWEN_META_PATH.exists():
+        raise FileNotFoundError(f"Meta qwen nao encontrado: {QWEN_META_PATH}")
+    with open(QWEN_META_PATH, "r", encoding="utf-8") as f:
+        return json.load(f)["cdacordao_order"]
+
+
+def run_full_pipeline_qwen(force_recompute: bool = False) -> tuple[np.ndarray, list[str]]:
+    """Pipeline Qwen: computa todas as rodadas + media das 50 queries. Retorna (mean_emb, cdacordao_order)."""
+    all_embeddings  = compute_all_round_embeddings_qwen(force_recompute=force_recompute)
+    mean_embeddings = compute_mean_embeddings_qwen(all_embeddings, force_recompute=force_recompute)
+    cdacordao_order = load_meta_qwen()
+    return mean_embeddings, cdacordao_order
+
+
 if __name__ == "__main__":
-    mean_emb, order = run_full_pipeline()
+    # mean_emb, order = run_full_pipeline()
+    mean_emb, order = run_full_pipeline_qwen()
+
     print(f"Media final: shape={mean_emb.shape}, norm_media={np.linalg.norm(mean_emb, axis=1).mean():.4f}")

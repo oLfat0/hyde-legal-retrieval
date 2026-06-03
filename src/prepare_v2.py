@@ -24,10 +24,10 @@ python -m src.hyde_v2
 python -m src.hyde_embedder_v2
 
 # 3. Roda os 4 experimentos
-python experiments_v2/baseline_dense_v2.py      -> Aqui que o Índice FAISS é criado
-python experiments_v2/hyde_dense_v2.py
-python experiments_v2/baseline_hybrid_v2.py     -> Aqui que o Índice BM25 é criado
-python experiments_v2/hyde_hybrid_v2.py
+python experiments/baseline_dense_v2.py      -> Aqui que o Índice FAISS é criado
+python experiments/hyde_dense_v2.py || hyde_dense_qwen.py
+python experiments/baseline_hybrid_v2.py     -> Aqui que o Índice BM25 é criado
+python experiments/hyde_hybrid_v2.py || hyde_hybrid_qwen.py
 """
 
 from __future__ import annotations
