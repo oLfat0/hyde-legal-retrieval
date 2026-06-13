@@ -2,25 +2,27 @@
 
 Undergraduate Research Project — Information Retrieval & NLP
 
-This repository contains the datasets and experimental pipeline developed for an undergraduate research project investigating the impact of **Hypothetical Document Embeddings (HyDE)** on the retrieval of Brazilian legal precedents.
+This repository contains the dataset and experimental pipeline developed for an undergraduate research project investigating the impact of **Hypothetical Document Embeddings (HyDE)** on the retrieval of Brazilian legal precedents.
 
-The study evaluates whether semantic expansion of queries using large language models improves dense retrieval performance on a corpus of judicial decisions from the Brazilian legal system.
+The study evaluates whether semantic expansion of queries via large language models improves dense and hybrid retrieval performance on a corpus of structured judicial decisions (*ementas*) from the Court of Justice of Mato Grosso do Sul (TJMS).
 
 ---
 
-## Research Question
+## Research Questions
 
-**Does the HyDE technique improve semantic retrieval of legal precedents in Brazilian jurisprudence?**
+The work is guided by three research questions:
+
+- **RQ1 (General Effectiveness):** Does HyDE-based semantic expansion improve retrieval over traditional lexical (BM25) and pure dense baselines?
+- **RQ2 (Hybridization):** Does combining HyDE with hybrid retrieval (dense + sparse via RRF) outperform the isolated approaches?
+- **RQ3 (Query Granularity):** How does the length and specificity of the query (isolated factual sections vs. the full structured body) affect the quality of the HyDE-generated document?
 
 ---
 
 ## Overview
 
-Recent advances in **dense retrieval** have demonstrated strong performance in semantic search tasks by representing queries and documents as vectors in a shared embedding space. However, short queries often lack sufficient semantic information for accurate representation.
+**Dense retrieval** represents queries and documents as vectors in a shared embedding space, capturing semantic similarity beyond exact lexical matching. However, queries phrased very differently from the target documents suffer from vocabulary mismatch.
 
-The **HyDE (Hypothetical Document Embeddings)** technique addresses this issue by generating a hypothetical document from the query using a language model. The embedding of this generated document is then used for retrieval instead of the original query.
-
-This project evaluates the effectiveness of this technique in a **Brazilian legal domain**, using a corpus of judicial decision summaries (*ementas*).
+The **HyDE (Hypothetical Document Embeddings)** technique mitigates this by prompting a language model to generate a hypothetical document from the query, then using that document's embedding for retrieval. This project evaluates the technique in the **Brazilian legal domain**, where the dense, jargon-heavy language of court rulings poses a strong vocabulary-mismatch challenge.
 
 ---
 
@@ -28,82 +30,82 @@ This project evaluates the effectiveness of this technique in a **Brazilian lega
 
 **Corpus**
 
-Approximately **500 public legal decisions** extracted from the jurisprudence system of the Mato Grosso do Sul Court of Justice (TJMS).
+501 public legal decisions extracted from the TJMS jurisprudence system, focusing on civil-law rulings. Each decision is natively split by the court into two components:
 
-**Query Generation**
+- **Cabeçalho da Ementa** (header — indexers and legal thesis): acts as the retrieval **key** (document-alvo).
+- **Corpo Estruturado da Ementa** (structured body — facts, controversy, reasoning): acts as the **query**.
 
-Synthetic queries were generated automatically using **LLM-based summaries** of each document.
+**Models**
 
-**Retrieval Strategies Compared**
+- Embedding: `facebook/mcontriever-msmarco` (768-dim), zero-shot, no fine-tuning.
+- HyDE generation: `gemma-3-12b-it`, temperature 0.7, 5 generation rounds averaged.
 
-1. **Baseline** – embedding of the generated summary  
-2. **HyDE** – embedding of a hypothetical document generated from the summary
+**Retrieval strategies compared**
 
-Document embeddings were indexed using **FAISS** and evaluated using standard information retrieval metrics.
+1. **Baseline + Dense** — embedding of the original query (structured body).
+2. **HyDE + Dense** — embedding of the averaged hypothetical headers.
+3. **Baseline + Hybrid** — dense + BM25 fused via Reciprocal Rank Fusion (RRF).
+4. **HyDE + Hybrid** — HyDE dense + BM25 fused via RRF.
+
+Target embeddings are indexed statically with **FAISS** (`IndexFlatIP` over L2-normalized vectors, equivalent to cosine similarity).
 
 ---
 
 ## Evaluation Metrics
 
-The following metrics were used:
+A controlled **auto-retrieval** protocol is adopted: each query has exactly one relevant document (its own header). Performance is measured with:
 
-- **Recall@k**
+- **Recall@k** (k = 1, 5, 10)
 - **Mean Reciprocal Rank (MRR)**
 - **nDCG@k**
-
-A controlled **self-retrieval protocol** was adopted, where each query is expected to retrieve its original document.
 
 ---
 
 ## Repository Structure
+
 ```
-├── data/           
-│ ├── corpus/           # legal decision summaries (ementas)
-│ └── queries/          # generated mini-summaries and HyDE documents
-├── src/                # experimental pipeline and retrieval scripts
-├── experiments/        # experiment configurations
-└── results/            # evaluation results and metric outputs
-```     
-
+├── data/
+│   ├── corpus/              # structured ementas (ementas_v2.json)
+│   ├── queries/             # queries per granularity (rq3) and full body
+│   ├── faiss_index_v2/      # cached dense index (auto-generated)
+│   ├── bm25_index_v2/       # cached sparse index (auto-generated)
+│   ├── hyde_v2_docs/        # generated hypothetical headers
+│   ├── hyde_v2_embeds/      # embeddings + averaged HyDE vectors
+│   └── vectors/             # exported vectors + PCA/t-SNE visualization
+├── src/                     # pipeline: embedder, hyde, retriever, evaluator
+├── experiments_v2/          # RQ1 / RQ2 experiments (full corpus)
+├── experiments_rq3/         # RQ3 experiments (curto / medio / longo)
+├── results_v2/              # RQ1 / RQ2 metric outputs
+├── results_rq3/             # RQ3 metric outputs
+└── results_rq3_qwen/        # RQ3 metric outputs with Qwen 2.5 14b
+```
 
 ---
-
-## Contributions
-
-- Benchmark for **dense retrieval in Brazilian legal texts**
-- Empirical evaluation of **HyDE in Portuguese legal documents**
-- Reproducible experimental pipeline for **legal information retrieval**
-
----
-
-## Research Context
-
-This repository is part of an **undergraduate research project in Computer Engineering**, focusing on **Information Retrieval and Natural Language Processing applied to the legal domain**.
-
-The goal is to investigate the applicability of modern retrieval techniques in Brazilian legal datasets and contribute to the development of reproducible benchmarks for the area.
 
 ## Running the Experiments
 
-### Pipeline Order
+### RQ1 / RQ2 — main experiments (full corpus)
 
-The full RQ3 pipeline (query-granularity analysis) runs in the following order:
+```bash
+python experiments_v2/baseline_dense_v2.py
+python experiments_v2/hyde_dense_v2.py
+python experiments_v2/baseline_hybrid_v2.py
+python experiments_v2/hyde_hybrid_v2.py
+```
+
+### RQ3 — query-granularity analysis
 
 #### 1. Prepare queries by granularity
 
-Extracts the three granularity levels (`curto`, `medio`, `longo`) from each document's structured body:
+Extracts the three granularity levels from each document's structured body:
 
 ```bash
 python -m src.prepare_rq3
 ```
 
-This generates:
-- `data/queries/queries_rq3_curto.json` — section "I. CASO EM EXAME" only
-- `data/queries/queries_rq3_medio.json` — sections I + II
-- `data/queries/queries_rq3_longo.json` — full structured body
+Generates `queries_rq3_curto.json` (section I only), `queries_rq3_medio.json` (sections I + II), and `queries_rq3_longo.json` (full body).
 
 #### 2. Generate hypothetical documents (HyDE) per granularity
-
-Runs the LLM (Gemma 3 via OpenRouter) to generate 5 rounds of hypothetical ementas for each scenario:
 
 ```bash
 python -m src.hyde_rq3 --granul curto
@@ -113,8 +115,6 @@ python -m src.hyde_rq3 --granul longo
 
 #### 3. Compute embeddings and averaged vectors
 
-Embeds each round and computes the L2-normalized mean across the 5 rounds:
-
 ```bash
 python -m src.hyde_embedder_rq3 --granul curto
 python -m src.hyde_embedder_rq3 --granul medio
@@ -123,7 +123,7 @@ python -m src.hyde_embedder_rq3 --granul longo
 
 #### 4. Run the retrieval experiments
 
-For each scenario, run the four configurations. The FAISS and BM25 indexes are built automatically on first run (full corpus):
+FAISS and BM25 indexes are built automatically on first run. Use `&&` to chain runs:
 
 ```bash
 # CURTO
@@ -149,12 +149,39 @@ Results are saved as JSON files in `results_rq3/`.
 
 ### Notes
 
-- The `longo` scenario uses the complete structured body and is equivalent to the main RQ1/RQ2 experiments — if those results already exist, they can be reused.
-- Indexes are cached on disk. To force a rebuild (e.g. after changing the corpus), delete the relevant folders under `data/` (`faiss_index_v2/`, `bm25_index_v2/`) and the `data/hyde_rq3_docs/` and `data/hyde_rq3_embeds/` caches.
-- The baseline configurations do not depend on the LLM — only the HyDE configurations invoke the language model.
+- The `longo` scenario uses the complete structured body and is equivalent to the main RQ1 / RQ2 experiments — those results can be reused.
+- Indexes are cached on disk. To force a rebuild (e.g. after changing the corpus), delete the relevant folders under `data/` (`faiss_index_v2/`, `bm25_index_v2/`) and the `hyde_*` caches.
+- Baseline configurations do not invoke the LLM — only HyDE configurations do.
+
+---
+
+## Vector Export & Visualization
+
+The intermediate embeddings can be exported for inspection and analysis:
+
+```bash
+python -m src.export_vectors --compute-queries
+```
+
+This produces raw CSVs (501 × 768) for each vector type — `f(ementa)`, `f(descrição)`, `f(mean HyDE)` — plus a 2D PCA scatter plot (`pca_2d.png`) showing how the three representations occupy the embedding space.
+
+---
+
+## Contributions
+
+- A controlled benchmark for **dense and hybrid retrieval over structured Brazilian legal texts**.
+- An empirical evaluation of **HyDE in Portuguese-language legal documents**.
+- A study of how **query granularity** affects generation-based semantic expansion.
+- A reproducible experimental pipeline for **legal information retrieval**.
+
+---
+
+## Research Context
+
+This repository is part of an **undergraduate research project in Computer Engineering**, focusing on Information Retrieval and Natural Language Processing applied to the legal domain. The goal is to investigate modern retrieval techniques on Brazilian legal data and contribute reproducible benchmarks to the area.
 
 ---
 
 ## License
 
-This repository uses only **publicly available legal documents**. Please refer to the respective court systems for the original sources.
+This repository uses only **publicly available legal documents**. Refer to the respective court systems for the original sources.

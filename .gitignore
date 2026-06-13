@@ -24,7 +24,6 @@ bm25_index/
 bm25_index_v2/
 faiss_index/
 faiss_index_v2/
-vectors/
 
 hyde_v1_embeds/
 hyde_v2_embeds/
