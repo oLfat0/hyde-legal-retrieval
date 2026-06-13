@@ -12,7 +12,7 @@ No v2:
   corpus = ementa     (palavras-chave — o que indexamos no FAISS)
   query  = descricao  (texto completo do processo — o que buscamos)
 
-Ordem de execução par ao experimento:
+Ordem de execução para o experimento:
 
 # 0. Prepara queries_v2.json a partir do novo corpus
 python -m src.prepare_v2

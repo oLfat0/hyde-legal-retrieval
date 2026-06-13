@@ -6,15 +6,15 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-TOKEN_VLLM = os.getenv("TOKEN_VLLM")
+TOKEN_VLLM = os.getenv("TOKEN_VLLM_GMA3")
 print(f"Token: '{TOKEN_VLLM}'")
 print(f"Tamanho: {len(TOKEN_VLLM) if TOKEN_VLLM else 'None'}")
 
 start = time.time()
 
-client = OpenAI(base_url='https://llm.liaufms.org/v1/qwen2-5-14b-instruct-awq/', api_key=TOKEN_VLLM)
+client = OpenAI(base_url='https://llm-lia.ufms.br/v1/gemma-3-12b-it', api_key=TOKEN_VLLM)
 resp = client.chat.completions.create(
-    model='Qwen/Qwen2.5-14B-Instruct-AWQ',
+    model='google/gemma-3-12b-it',
     messages=[{'role': 'user', 'content': 'Hi'}],
 )
 

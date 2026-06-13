@@ -1,5 +1,6 @@
-VLLM_BASE_URL      = "https://llm.liaufms.org/v1/qwen2-5-14b-instruct-awq/"
-DEFAULT_MODEL      = "Qwen/Qwen2.5-14B-Instruct-AWQ"
+# VLLM_BASE_URL      = "https://llm-lia.ufms.br/v1/gemma-3-12b-it"
+VLLM_BASE_URL      = "https://openrouter.ai/api/v1/"
+DEFAULT_MODEL      = "google/gemma-3-12b-it"
 LLM_AGENT_TIMEOUT  = 120
 HYDE_TEMPERATURE   = 0.7
 HYDE_MAX_TOKENS    = 200

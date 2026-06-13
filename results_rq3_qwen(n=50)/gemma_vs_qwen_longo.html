@@ -1,0 +1,100 @@
+
+<h2 class="sr-only">Comparativo Gemma 3 12B vs Qwen 2.5 14B AWQ no cenário longo (query completa, N=50, índice 50 docs), métricas Recall@1, MRR e nDCG@10</h2>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans)}
+.wrap{padding:1rem 0 2rem}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:1.5rem;font-size:12px;color:var(--color-text-secondary)}
+.legend span{display:flex;align-items:center;gap:6px}
+.legend i{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+.st{font-size:14px;font-weight:500;color:var(--color-text-primary);margin:1.5rem 0 .75rem}
+.ch{position:relative;width:100%;height:240px;margin-bottom:.5rem}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px;margin:1rem 0}
+.card{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:10px 12px}
+.cl{font-size:11px;color:var(--color-text-secondary);margin-bottom:4px}
+.cv{font-size:15px;font-weight:500;color:var(--color-text-primary)}
+.cd{font-size:11px;margin-top:2px}
+.pos{color:#0F6E56}.neg{color:#A32D2D}
+.note{background:var(--color-background-secondary);border-left:3px solid #378ADD;border-radius:0 var(--border-radius-md) var(--border-radius-md) 0;padding:10px 14px;font-size:13px;color:var(--color-text-secondary);margin-top:1.5rem;line-height:1.6}
+</style>
+
+<div class="wrap">
+
+<div class="legend">
+  <span><i style="background:#888780"></i>Baseline (idêntico nos dois)</span>
+  <span><i style="background:#7F77DD"></i>HyDE Dense — Gemma 3 12B</span>
+  <span><i style="background:#EF9F27"></i>HyDE Hybrid — Gemma 3 12B</span>
+  <span><i style="background:#D85A30"></i>HyDE Dense — Qwen 2.5 14B AWQ</span>
+  <span><i style="background:#D4537E"></i>HyDE Hybrid — Qwen 2.5 14B AWQ</span>
+</div>
+
+<p class="st">Recall@k — cenário longo, N=50, índice=50 docs</p>
+<div class="ch">
+  <canvas id="c1" role="img" aria-label="Recall@1, @5 e @10 para 5 configurações no cenário longo. Gemma HyDE Hybrid lidera com R@1=0.74, R@5=0.92, R@10=0.98. Qwen HyDE Hybrid: R@1=0.64, R@5=0.92, R@10=0.94.">
+    Recall@1: Baseline Dense 0.30, Baseline Hybrid 0.38, Gemma HyDE Dense 0.60, Gemma HyDE Hybrid 0.74, Qwen HyDE Dense 0.54, Qwen HyDE Hybrid 0.64.
+  </canvas>
+</div>
+
+<p class="st">MRR e nDCG@10 — cenário longo</p>
+<div class="ch">
+  <canvas id="c2" role="img" aria-label="MRR e nDCG@10. Gemma HyDE Hybrid: MRR=0.83, nDCG@10=0.87. Qwen HyDE Hybrid: MRR=0.76, nDCG@10=0.81.">
+    MRR: BL Dense 0.46, BL Hybrid 0.58, Gemma HyDE Dense 0.74, Gemma HyDE Hybrid 0.83, Qwen HyDE Dense 0.68, Qwen HyDE Hybrid 0.76.
+  </canvas>
+</div>
+
+<p class="st">Δ Gemma vs Qwen — HyDE (cenário longo)</p>
+<div class="cards">
+  <div class="card"><div class="cl">R@1 Dense</div><div class="cv">+0.060</div><div class="cd pos">Gemma melhor</div></div>
+  <div class="card"><div class="cl">R@1 Hybrid</div><div class="cv">+0.100</div><div class="cd pos">Gemma melhor</div></div>
+  <div class="card"><div class="cl">MRR Dense</div><div class="cv">+0.060</div><div class="cd pos">Gemma melhor</div></div>
+  <div class="card"><div class="cl">MRR Hybrid</div><div class="cv">+0.068</div><div class="cd pos">Gemma melhor</div></div>
+  <div class="card"><div class="cl">nDCG@10 Dense</div><div class="cv">+0.064</div><div class="cd pos">Gemma melhor</div></div>
+  <div class="card"><div class="cl">nDCG@10 Hybrid</div><div class="cv">+0.060</div><div class="cd pos">Gemma melhor</div></div>
+</div>
+
+<div class="note">
+  <strong>Leitura principal:</strong> os baselines são numericamente idênticos, confirmando que ambos os modelos foram avaliados sob as mesmas condições experimentais. No HyDE, o Gemma 3 12B supera consistentemente o Qwen 2.5 14B AWQ, com ganhos de 6 a 10pp nas métricas principais. A diferença, embora sistemática, é modesta — indicando que a quantização AWQ 4-bit do Qwen preserva boa parte da capacidade de geração de ementas hipotéticas no domínio jurídico. Ambos os modelos superam amplamente os baselines, validando a hipótese central do HyDE independentemente do LLM utilizado.
+</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const CFGS = [
+  {label:'Baseline+Dense',      color:'#888780', border:'#5F5E5A'},
+  {label:'Baseline+Hybrid',     color:'#B4B2A9', border:'#888780'},
+  {label:'HyDE Dense — Gemma',  color:'#7F77DD', border:'#534AB7'},
+  {label:'HyDE Hybrid — Gemma', color:'#EF9F27', border:'#BA7517'},
+  {label:'HyDE Dense — Qwen',   color:'#D85A30', border:'#993C1D'},
+  {label:'HyDE Hybrid — Qwen',  color:'#D4537E', border:'#993556'},
+];
+const D = {
+  bl_d : {r1:.30, r5:.70, r10:.84, mrr:.4625, ndcg10:.5523},
+  bl_h : {r1:.38, r5:.80, r10:.94, mrr:.5779, ndcg10:.6658},
+  gm_dd: {r1:.60, r5:.92, r10:.98, mrr:.7437, ndcg10:.8020},
+  gm_hh: {r1:.74, r5:.92, r10:.98, mrr:.8286, ndcg10:.8654},
+  qw_dd: {r1:.54, r5:.90, r10:.90, mrr:.6840, ndcg10:.7384},
+  qw_hh: {r1:.64, r5:.92, r10:.94, mrr:.7609, ndcg10:.8056},
+};
+const KEYS = ['bl_d','bl_h','gm_dd','gm_hh','qw_dd','qw_hh'];
+function mkDS(fields){
+  return CFGS.map((c,i)=>({
+    label:c.label, data:fields.map(f=>D[KEYS[i]][f]),
+    backgroundColor:c.color+'CC', borderColor:c.border, borderWidth:1,
+  }));
+}
+new Chart(document.getElementById('c1'),{
+  type:'bar',
+  data:{labels:['Recall@1','Recall@5','Recall@10'], datasets:mkDS(['r1','r5','r10'])},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false}},
+    scales:{y:{min:0,max:1.05,ticks:{callback:v=>v.toFixed(2)}}}}
+});
+new Chart(document.getElementById('c2'),{
+  type:'bar',
+  data:{labels:['MRR','nDCG@10'], datasets:mkDS(['mrr','ndcg10'])},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false}},
+    scales:{y:{min:0,max:1.05,ticks:{callback:v=>v.toFixed(2)}}}}
+});
+</script>

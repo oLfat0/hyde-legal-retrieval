@@ -37,6 +37,10 @@ from src.assets_v2 import (
     HYDE_QWEN_DOCS_DIR,
 )
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 RETRY_ATTEMPTS = 3
 RETRY_DELAY    = 5
 
@@ -67,7 +71,7 @@ def _build_prompt(descricao: str) -> str:
 
 
 def _get_client() -> OpenAI:
-    api_key = os.environ.get("TOKEN_VLLM")
+    api_key = os.environ.get("LLM_API_KEY")
     return OpenAI(base_url=VLLM_BASE_URL, api_key=api_key, timeout=LLM_AGENT_TIMEOUT)
 
 

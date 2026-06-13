@@ -1,3 +1,7 @@
+# Python
+__pycache__/
+*.pyc
+
 # Environments
 .env
 .envrc
@@ -24,4 +28,9 @@ vectors/
 
 hyde_v1_embeds/
 hyde_v2_embeds/
+
 hyde_qwen_embeds/
+hyde_rq3_qwen_embeds
+hyde_rq3_embeds/
+faiss_index_rq3
+bm25_index_rq3/
