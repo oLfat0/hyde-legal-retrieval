@@ -1,0 +1,122 @@
+
+<h2 class="sr-only">Tabela e gráficos do RQ3 final: impacto da granularidade da consulta com Gemma 3 12B sobre corpus completo de 501 documentos, cenários curto (118 palavras), médio (180 palavras) e longo (656 palavras)</h2>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans)}
+.wrap{padding:1rem 0 2rem}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:1.5rem;font-size:12px;color:var(--color-text-secondary)}
+.legend span{display:flex;align-items:center;gap:6px}
+.legend i{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+.st{font-size:14px;font-weight:500;color:var(--color-text-primary);margin:1.5rem 0 .75rem}
+.tbl-wrap{overflow-x:auto;margin-bottom:1.5rem}
+table{width:100%;border-collapse:collapse;font-size:12px;table-layout:fixed}
+thead tr{background:var(--color-background-secondary)}
+th{padding:8px 5px;text-align:center;font-weight:500;color:var(--color-text-secondary);border-bottom:1px solid var(--color-border-secondary);font-size:11px}
+th.left{text-align:left}
+td{padding:7px 5px;text-align:center;border-bottom:0.5px solid var(--color-border-tertiary);color:var(--color-text-primary);font-size:11px}
+td.left{text-align:left;font-weight:500}
+tr:last-child td{border-bottom:none}
+.badge{display:inline-block;font-size:10px;padding:2px 6px;border-radius:20px;font-weight:500}
+.b-curto{background:#E6F1FB;color:#0C447C}
+.b-medio{background:#EEEDFE;color:#3C3489}
+.b-longo{background:#E1F5EE;color:#085041}
+.ch{position:relative;width:100%;height:230px;margin-bottom:.5rem}
+.note{background:var(--color-background-secondary);border-left:3px solid #378ADD;border-radius:0 var(--border-radius-md) var(--border-radius-md) 0;padding:10px 14px;font-size:13px;color:var(--color-text-secondary);margin-top:1.5rem;line-height:1.6}
+</style>
+
+<div class="wrap">
+
+<div class="legend">
+  <span><i style="background:#378ADD"></i>Baseline + Dense</span>
+  <span><i style="background:#1D9E75"></i>Baseline + Hybrid</span>
+  <span><i style="background:#7F77DD"></i>HyDE + Dense</span>
+  <span><i style="background:#EF9F27"></i>HyDE + Hybrid</span>
+</div>
+
+<p class="st">Tabela 3 — Impacto da granularidade (Gemma 3 12B, corpus completo N=501)</p>
+<div class="tbl-wrap">
+<table>
+  <thead>
+    <tr>
+      <th class="left" style="width:24%">Configuração</th>
+      <th style="width:9%">Cenário</th>
+      <th style="width:7%">Ext.</th>
+      <th style="width:8%">R@1</th>
+      <th style="width:8%">R@5</th>
+      <th style="width:8%">R@10</th>
+      <th style="width:9%">MRR</th>
+      <th style="width:10%">nDCG@10</th>
+      <th style="width:13%">Docs enc.</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td class="left">Baseline + Dense</td><td><span class="badge b-curto">curto</span></td><td>118</td><td>0.1078</td><td>0.2395</td><td>0.3453</td><td>0.1672</td><td>0.2086</td><td>173 (34.5%)</td></tr>
+    <tr><td class="left">Baseline + Dense</td><td><span class="badge b-medio">médio</span></td><td>180</td><td>0.1417</td><td>0.3054</td><td>0.3892</td><td>0.2120</td><td>0.2540</td><td>195 (38.9%)</td></tr>
+    <tr><td class="left">Baseline + Dense</td><td><span class="badge b-longo">longo</span></td><td>656</td><td>0.0858</td><td>0.1916</td><td>0.2675</td><td>0.1313</td><td>0.1630</td><td>134 (26.7%)</td></tr>
+    <tr style="border-top:1px solid var(--color-border-secondary)">
+    <td class="left">Baseline + Hybrid</td><td><span class="badge b-curto">curto</span></td><td>118</td><td>0.2455</td><td>0.5030</td><td>0.5808</td><td>0.3511</td><td>0.4065</td><td>291 (58.1%)</td></tr>
+    <tr><td class="left">Baseline + Hybrid</td><td><span class="badge b-medio">médio</span></td><td>180</td><td>0.3014</td><td>0.5609</td><td>0.6447</td><td>0.4017</td><td>0.4598</td><td>323 (64.5%)</td></tr>
+    <tr><td class="left">Baseline + Hybrid</td><td><span class="badge b-longo">longo</span></td><td>656</td><td>0.1756</td><td>0.4990</td><td>0.6487</td><td>0.3065</td><td>0.3877</td><td>325 (64.9%)</td></tr>
+    <tr style="border-top:1px solid var(--color-border-secondary)">
+    <td class="left">HyDE + Dense</td><td><span class="badge b-curto">curto</span></td><td>118</td><td>0.2635</td><td>0.4491</td><td>0.5289</td><td>0.3466</td><td>0.3902</td><td>265 (52.9%)</td></tr>
+    <tr><td class="left">HyDE + Dense</td><td><span class="badge b-medio">médio</span></td><td>180</td><td>0.3293</td><td>0.5289</td><td>0.5908</td><td>0.4124</td><td>0.4552</td><td>296 (59.1%)</td></tr>
+    <tr><td class="left">HyDE + Dense</td><td><span class="badge b-longo">longo</span></td><td>656</td><td>0.3393</td><td>0.5309</td><td>0.6208</td><td>0.4247</td><td>0.4713</td><td>311 (62.1%)</td></tr>
+    <tr style="border-top:1px solid var(--color-border-secondary)">
+    <td class="left">HyDE + Hybrid</td><td><span class="badge b-curto">curto</span></td><td>118</td><td>0.3952</td><td>0.5928</td><td>0.6547</td><td>0.4813</td><td>0.5233</td><td>328 (65.5%)</td></tr>
+    <tr><td class="left">HyDE + Hybrid</td><td><span class="badge b-medio">médio</span></td><td>180</td><td>0.4551</td><td>0.6607</td><td>0.7126</td><td>0.5451</td><td>0.5859</td><td>357 (71.3%)</td></tr>
+    <tr><td class="left" style="background:var(--color-background-secondary);font-style:italic">HyDE + Hybrid</td><td><span class="badge b-longo">longo</span></td><td>656</td><td><strong>0.4770</strong></td><td>0.6806</td><td>0.7365</td><td>0.5664</td><td>0.6077</td><td>369 (73.7%)</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p class="st">Recall@1 por granularidade</p>
+<div class="ch">
+  <canvas id="c1" role="img" aria-label="Recall@1 por granularidade. HyDE Hybrid longo lidera com 0.48. Padrão muda em relação ao N=50: longo agora compete com médio.">BL Dense: 0.11/0.14/0.09. BL Hybrid: 0.25/0.30/0.18. HyDE Dense: 0.26/0.33/0.34. HyDE Hybrid: 0.40/0.46/0.48.</canvas>
+</div>
+
+<p class="st">MRR por granularidade</p>
+<div class="ch">
+  <canvas id="c2" role="img" aria-label="MRR por granularidade. HyDE Hybrid longo e médio lideram próximos de 0.56 e 0.55.">BL Dense: 0.167/0.212/0.131. BL Hybrid: 0.351/0.402/0.307. HyDE Dense: 0.347/0.412/0.425. HyDE Hybrid: 0.481/0.545/0.566.</canvas>
+</div>
+
+<p class="st">nDCG@10 por granularidade</p>
+<div class="ch">
+  <canvas id="c3" role="img" aria-label="nDCG@10 por granularidade. HyDE Hybrid longo lidera com 0.61.">BL Dense: 0.209/0.254/0.163. BL Hybrid: 0.407/0.460/0.388. HyDE Dense: 0.390/0.455/0.471. HyDE Hybrid: 0.523/0.586/0.608.</canvas>
+</div>
+
+<div class="note">
+  <strong>Padrão (RQ3, corpus completo):</strong> com 501 documentos, o cenário longo passa a liderar no HyDE — R@1=0.48, MRR=0.57, nDCG@10=0.61 no HyDE+Hybrid, ligeiramente acima do médio. Isso difere do experimento piloto (N=50), onde o médio era o ponto ótimo. A explicação provável: em um corpus maior, há mais documentos "confundíveis", e o contexto adicional do corpo completo ajuda o LLM a gerar ementas hipotéticas mais discriminativas. O cenário curto mantém o pior desempenho, mas o HyDE ainda recupera bem frente ao baseline. Em todos os cenários, HyDE+Hybrid supera as demais configurações.
+</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const LABELS = ['Curto (~118)','Médio (~180)','Longo (~656)'];
+const DS = [
+  {label:'BL+Dense',    color:'#378ADD', border:'#185FA5'},
+  {label:'BL+Hybrid',   color:'#1D9E75', border:'#0F6E56'},
+  {label:'HyDE+Dense',  color:'#7F77DD', border:'#534AB7'},
+  {label:'HyDE+Hybrid', color:'#EF9F27', border:'#BA7517'},
+];
+const DATA = {
+  r1:   [[.1078,.1417,.0858],[.2455,.3014,.1756],[.2635,.3293,.3393],[.3952,.4551,.4770]],
+  mrr:  [[.1672,.2120,.1313],[.3511,.4017,.3065],[.3466,.4124,.4247],[.4813,.5451,.5664]],
+  ndcg: [[.2086,.2540,.1630],[.4065,.4598,.3877],[.3902,.4552,.4713],[.5233,.5859,.6077]],
+};
+function mkChart(id, field, ymax){
+  new Chart(document.getElementById(id),{
+    type:'bar',
+    data:{labels:LABELS, datasets:DS.map((d,i)=>({
+      label:d.label, data:DATA[field][i],
+      backgroundColor:d.color+'CC', borderColor:d.border, borderWidth:1,
+    }))},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false}},
+      scales:{y:{min:0,max:ymax,ticks:{callback:v=>v.toFixed(2)}}}}
+  });
+}
+mkChart('c1','r1',  0.65);
+mkChart('c2','mrr', 0.65);
+mkChart('c3','ndcg',0.7);
+</script>

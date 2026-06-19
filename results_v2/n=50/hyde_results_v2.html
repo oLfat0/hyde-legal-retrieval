@@ -1,0 +1,114 @@
+
+<h2 class="sr-only">Gráfico comparativo dos experimentos v2: Baseline vs HyDE com corpus ementa/descrição separados, 50 processos</h2>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans)}
+.wrap{padding:1rem 0 2rem}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:1.5rem;font-size:12px;color:var(--color-text-secondary)}
+.legend span{display:flex;align-items:center;gap:5px}
+.legend i{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+.section-title{font-size:14px;font-weight:500;color:var(--color-text-primary);margin:1.5rem 0 .5rem}
+.chart-wrap{position:relative;width:100%;height:260px;margin-bottom:.5rem}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin:1.5rem 0}
+.card{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:10px 12px}
+.card-label{font-size:11px;color:var(--color-text-secondary);margin-bottom:4px}
+.card-val{font-size:15px;font-weight:500;color:var(--color-text-primary)}
+.card-delta{font-size:11px;margin-top:2px}
+.pos{color:#0F6E56}.neg{color:#A32D2D}
+.note{background:var(--color-background-secondary);border-left:3px solid #378ADD;border-radius:0 var(--border-radius-md) var(--border-radius-md) 0;padding:10px 14px;font-size:13px;color:var(--color-text-secondary);margin-top:1.5rem;line-height:1.6}
+</style>
+
+<div class="wrap">
+
+<div class="legend">
+  <span><i style="background:#378ADD"></i>Baseline + Dense</span>
+  <span><i style="background:#7F77DD"></i>HyDE + Dense (avg 5)</span>
+  <span><i style="background:#1D9E75"></i>Baseline + Hybrid</span>
+  <span><i style="background:#EF9F27"></i>HyDE + Hybrid (avg 5)</span>
+</div>
+
+<p class="section-title">Recall@k</p>
+<div class="chart-wrap">
+  <canvas id="c-recall" role="img" aria-label="Gráfico de barras com Recall@1, @5 e @10 para 4 configurações v2. HyDE Hybrid lidera com R@1=0.74, R@5=0.92, R@10=0.98.">
+    Recall@1: Baseline Dense 0.30, HyDE Dense 0.60, Baseline Hybrid 0.38, HyDE Hybrid 0.74.
+  </canvas>
+</div>
+
+<p class="section-title">MRR e nDCG@10</p>
+<div class="chart-wrap">
+  <canvas id="c-mrr" role="img" aria-label="Gráfico de barras com MRR e nDCG@10. HyDE Hybrid lidera em ambas com MRR=0.83 e nDCG@10=0.87.">
+    MRR: Baseline Dense 0.46, HyDE Dense 0.74, Baseline Hybrid 0.58, HyDE Hybrid 0.83.
+  </canvas>
+</div>
+
+<p class="section-title">Ganho do HyDE sobre o Baseline (Dense)</p>
+<div class="cards">
+  <div class="card"><div class="card-label">Recall@1</div><div class="card-val">0.60</div><div class="card-delta pos">+30.0pp vs baseline</div></div>
+  <div class="card"><div class="card-label">Recall@5</div><div class="card-val">0.92</div><div class="card-delta pos">+22.0pp vs baseline</div></div>
+  <div class="card"><div class="card-label">Recall@10</div><div class="card-val">0.98</div><div class="card-delta pos">+14.0pp vs baseline</div></div>
+  <div class="card"><div class="card-label">MRR</div><div class="card-val">0.7437</div><div class="card-delta pos">+28.1pp vs baseline</div></div>
+  <div class="card"><div class="card-label">nDCG@10</div><div class="card-val">0.8020</div><div class="card-delta pos">+24.97pp vs baseline</div></div>
+</div>
+
+<p class="section-title">Ganho do HyDE sobre o Baseline (Hybrid)</p>
+<div class="cards">
+  <div class="card"><div class="card-label">Recall@1</div><div class="card-val">0.74</div><div class="card-delta pos">+36.0pp vs baseline</div></div>
+  <div class="card"><div class="card-label">Recall@5</div><div class="card-val">0.92</div><div class="card-delta pos">+12.0pp vs baseline</div></div>
+  <div class="card"><div class="card-label">Recall@10</div><div class="card-val">0.98</div><div class="card-delta pos">+4.0pp vs baseline</div></div>
+  <div class="card"><div class="card-label">MRR</div><div class="card-val">0.8286</div><div class="card-delta pos">+25.07pp vs baseline</div></div>
+  <div class="card"><div class="card-label">nDCG@10</div><div class="card-val">0.8654</div><div class="card-delta pos">+19.96pp vs baseline</div></div>
+</div>
+
+<div class="note">
+  <strong>Resultado principal:</strong> com a separação ementa/descrição, o HyDE finalmente supera o Baseline em todas as métricas e configurações — ao contrário dos experimentos v1. O HyDE+Hybrid atinge R@1=0.74 e MRR=0.83, contra R@1=0.30 e MRR=0.46 do Baseline+Dense. A hipótese central do artigo se confirma neste cenário.
+</div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const CFGS = [
+  {label:'Baseline+Dense',  color:'#378ADD', border:'#185FA5'},
+  {label:'HyDE+Dense',      color:'#7F77DD', border:'#534AB7'},
+  {label:'Baseline+Hybrid', color:'#1D9E75', border:'#0F6E56'},
+  {label:'HyDE+Hybrid',     color:'#EF9F27', border:'#BA7517'},
+];
+const DATA = {
+  bl_d : {r1:.30,  r5:.70,  r10:.84,  mrr:.4625, ndcg10:.5523},
+  hd   : {r1:.60,  r5:.92,  r10:.98,  mrr:.7437, ndcg10:.8020},
+  bl_h : {r1:.38,  r5:.80,  r10:.94,  mrr:.5779, ndcg10:.6658},
+  hh   : {r1:.74,  r5:.92,  r10:.98,  mrr:.8286, ndcg10:.8654},
+};
+const KEYS = ['bl_d','hd','bl_h','hh'];
+
+function mkDatasets(fields){
+  return CFGS.map((c,i)=>({
+    label:c.label,
+    data:fields.map(f=>DATA[KEYS[i]][f]),
+    backgroundColor:c.color+'CC',
+    borderColor:c.border,
+    borderWidth:1,
+  }));
+}
+
+new Chart(document.getElementById('c-recall'),{
+  type:'bar',
+  data:{labels:['Recall@1','Recall@5','Recall@10'], datasets:mkDatasets(['r1','r5','r10'])},
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false}},
+    scales:{y:{min:0,max:1.05,ticks:{callback:v=>v.toFixed(2)}}}
+  }
+});
+
+new Chart(document.getElementById('c-mrr'),{
+  type:'bar',
+  data:{labels:['MRR','nDCG@10'], datasets:mkDatasets(['mrr','ndcg10'])},
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false}},
+    scales:{y:{min:0,max:1.05,ticks:{callback:v=>v.toFixed(2)}}}
+  }
+});
+</script>

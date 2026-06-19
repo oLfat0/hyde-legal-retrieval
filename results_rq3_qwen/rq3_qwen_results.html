@@ -1,0 +1,122 @@
+
+<h2 class="sr-only">Tabela e gráficos do RQ3 com resultados corrigidos (índice de 50 documentos): Qwen 2.5 14B AWQ, cenários curto, médio e longo, métricas Recall@1, MRR e nDCG@10</h2>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans)}
+.wrap{padding:1rem 0 2rem}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:1.5rem;font-size:12px;color:var(--color-text-secondary)}
+.legend span{display:flex;align-items:center;gap:6px}
+.legend i{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+.st{font-size:14px;font-weight:500;color:var(--color-text-primary);margin:1.5rem 0 .75rem}
+.tbl-wrap{overflow-x:auto;margin-bottom:1.5rem}
+table{width:100%;border-collapse:collapse;font-size:13px;table-layout:fixed}
+thead tr{background:var(--color-background-secondary)}
+th{padding:8px 6px;text-align:center;font-weight:500;color:var(--color-text-secondary);border-bottom:1px solid var(--color-border-secondary);font-size:12px}
+th.left{text-align:left}
+td{padding:7px 6px;text-align:center;border-bottom:0.5px solid var(--color-border-tertiary);color:var(--color-text-primary);font-size:12px}
+td.left{text-align:left;font-weight:500}
+tr:last-child td{border-bottom:none}
+.badge{display:inline-block;font-size:11px;padding:2px 7px;border-radius:20px;font-weight:500}
+.b-curto{background:#E6F1FB;color:#0C447C}
+.b-medio{background:#EEEDFE;color:#3C3489}
+.b-longo{background:#E1F5EE;color:#085041}
+.ch{position:relative;width:100%;height:230px;margin-bottom:.5rem}
+.note{background:var(--color-background-secondary);border-left:3px solid #378ADD;border-radius:0 var(--border-radius-md) var(--border-radius-md) 0;padding:10px 14px;font-size:13px;color:var(--color-text-secondary);margin-top:1.5rem;line-height:1.6}
+</style>
+
+<div class="wrap">
+
+<div class="legend">
+  <span><i style="background:#378ADD"></i>Baseline + Dense</span>
+  <span><i style="background:#1D9E75"></i>Baseline + Hybrid</span>
+  <span><i style="background:#7F77DD"></i>HyDE + Dense</span>
+  <span><i style="background:#EF9F27"></i>HyDE + Hybrid</span>
+</div>
+
+<p class="st">Tabela 3 — Impacto da granularidade (Qwen 2.5 14B AWQ, N=50, índice=50 docs)</p>
+<div class="tbl-wrap">
+<table>
+  <thead>
+    <tr>
+      <th class="left" style="width:26%">Configuração</th>
+      <th style="width:10%">Cenário</th>
+      <th style="width:8%">Ext.</th>
+      <th style="width:8%">R@1</th>
+      <th style="width:8%">R@5</th>
+      <th style="width:8%">R@10</th>
+      <th style="width:9%">MRR</th>
+      <th style="width:9%">nDCG@10</th>
+      <th style="width:14%">Docs enc.</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td class="left">Baseline + Dense</td><td><span class="badge b-curto">curto</span></td><td>136</td><td>0.3000</td><td>0.6200</td><td>0.8600</td><td>0.4570</td><td>0.5512</td><td>43 (86%)</td></tr>
+    <tr><td class="left">Baseline + Dense</td><td><span class="badge b-medio">médio</span></td><td>190</td><td>0.4200</td><td>0.7400</td><td>0.8600</td><td>0.5519</td><td>0.6254</td><td>43 (86%)</td></tr>
+    <tr><td class="left">Baseline + Dense</td><td><span class="badge b-longo">longo</span></td><td>612</td><td>0.3000</td><td>0.7000</td><td>0.8400</td><td>0.4625</td><td>0.5523</td><td>42 (84%)</td></tr>
+    <tr style="border-top:1px solid var(--color-border-secondary)">
+    <td class="left">Baseline + Hybrid</td><td><span class="badge b-curto">curto</span></td><td>136</td><td>0.4600</td><td>0.8200</td><td>0.9600</td><td>0.6132</td><td>0.6962</td><td>48 (96%)</td></tr>
+    <tr><td class="left">Baseline + Hybrid</td><td><span class="badge b-medio">médio</span></td><td>190</td><td>0.5600</td><td>0.8400</td><td>0.9200</td><td>0.6685</td><td>0.7288</td><td>46 (92%)</td></tr>
+    <tr><td class="left">Baseline + Hybrid</td><td><span class="badge b-longo">longo</span></td><td>612</td><td>0.3800</td><td>0.8000</td><td>0.9400</td><td>0.5779</td><td>0.6658</td><td>47 (94%)</td></tr>
+    <tr style="border-top:1px solid var(--color-border-secondary)">
+    <td class="left">HyDE + Dense</td><td><span class="badge b-curto">curto</span></td><td>136</td><td>0.4600</td><td>0.8200</td><td>0.9000</td><td>0.6092</td><td>0.6800</td><td>45 (90%)</td></tr>
+    <tr><td class="left">HyDE + Dense</td><td><span class="badge b-medio">médio</span></td><td>190</td><td>0.6200</td><td>0.9000</td><td>0.9400</td><td>0.7200</td><td>0.7733</td><td>47 (94%)</td></tr>
+    <tr><td class="left">HyDE + Dense</td><td><span class="badge b-longo">longo</span></td><td>612</td><td>0.5400</td><td>0.9000</td><td>0.9000</td><td>0.6840</td><td>0.7384</td><td>45 (90%)</td></tr>
+    <tr style="border-top:1px solid var(--color-border-secondary)">
+    <td class="left">HyDE + Hybrid</td><td><span class="badge b-curto">curto</span></td><td>136</td><td>0.6400</td><td>0.9000</td><td>0.9800</td><td>0.7444</td><td>0.8010</td><td>49 (98%)</td></tr>
+    <tr><td class="left">HyDE + Hybrid</td><td><span class="badge b-medio">médio</span></td><td>190</td><td><strong>0.7000</strong></td><td><strong>0.9000</strong></td><td><strong>0.9600</strong></td><td><strong>0.7939</strong></td><td><strong>0.8346</strong></td><td>48 (96%)</td></tr>
+    <tr><td class="left">HyDE + Hybrid</td><td><span class="badge b-longo">longo</span></td><td>612</td><td>0.6400</td><td>0.9200</td><td>0.9400</td><td>0.7609</td><td>0.8056</td><td>47 (94%)</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p class="st">Recall@1 por granularidade</p>
+<div class="ch">
+  <canvas id="c1" role="img" aria-label="Recall@1 por granularidade. HyDE Hybrid médio lidera com 0.70. Baseline Dense curto e longo empatam em 0.30.">BL Dense: 0.30/0.42/0.30. BL Hybrid: 0.46/0.56/0.38. HyDE Dense: 0.46/0.62/0.54. HyDE Hybrid: 0.64/0.70/0.64.</canvas>
+</div>
+
+<p class="st">MRR por granularidade</p>
+<div class="ch">
+  <canvas id="c2" role="img" aria-label="MRR por granularidade. HyDE Hybrid médio lidera com 0.79. BL Dense longo é o mais baixo com 0.46.">BL Dense: 0.457/0.552/0.463. BL Hybrid: 0.613/0.669/0.578. HyDE Dense: 0.609/0.720/0.684. HyDE Hybrid: 0.744/0.794/0.761.</canvas>
+</div>
+
+<p class="st">nDCG@10 por granularidade</p>
+<div class="ch">
+  <canvas id="c3" role="img" aria-label="nDCG@10 por granularidade. HyDE Hybrid médio lidera com 0.83. Padrão consistente com Recall@1 e MRR.">BL Dense: 0.551/0.625/0.552. BL Hybrid: 0.696/0.729/0.666. HyDE Dense: 0.680/0.773/0.738. HyDE Hybrid: 0.801/0.835/0.806.</canvas>
+</div>
+
+<div class="note">
+  <strong>Padrão principal (RQ3):</strong> com o índice correto de 50 documentos, o cenário médio (~190 palavras) lidera em quase todas as métricas do HyDE — R@1=0.70, MRR=0.79, nDCG@10=0.83 no HyDE+Hybrid. O cenário curto surpreende positivamente no baseline hybrid (R@1=0.46), sugerindo que termos lexicais da seção "Caso em Exame" são altamente discriminativos. O cenário longo apresenta queda no R@1 do HyDE Dense vs médio, confirmando que excesso de texto dilui o sinal semântico.
+</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const LABELS = ['Curto\n(~136 palavras)','Médio\n(~190 palavras)','Longo\n(~612 palavras)'];
+const DS = [
+  {label:'BL+Dense',    color:'#378ADD', border:'#185FA5'},
+  {label:'BL+Hybrid',   color:'#1D9E75', border:'#0F6E56'},
+  {label:'HyDE+Dense',  color:'#7F77DD', border:'#534AB7'},
+  {label:'HyDE+Hybrid', color:'#EF9F27', border:'#BA7517'},
+];
+const DATA = {
+  r1:   [[.30,.42,.30],[.46,.56,.38],[.46,.62,.54],[.64,.70,.64]],
+  mrr:  [[.4570,.5519,.4625],[.6132,.6685,.5779],[.6092,.7200,.6840],[.7444,.7939,.7609]],
+  ndcg: [[.5512,.6254,.5523],[.6962,.7288,.6658],[.6800,.7733,.7384],[.8010,.8346,.8056]],
+};
+function mkChart(id, field, ymax){
+  new Chart(document.getElementById(id),{
+    type:'bar',
+    data:{labels:LABELS, datasets:DS.map((d,i)=>({
+      label:d.label, data:DATA[field][i],
+      backgroundColor:d.color+'CC', borderColor:d.border, borderWidth:1,
+    }))},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false}},
+      scales:{y:{min:0,max:ymax,ticks:{callback:v=>v.toFixed(2)}}}}
+  });
+}
+mkChart('c1','r1',  0.85);
+mkChart('c2','mrr', 0.95);
+mkChart('c3','ndcg',0.95);
+</script>
