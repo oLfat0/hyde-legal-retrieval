@@ -1,0 +1,108 @@
+{
+  "descricao": "Estudos de caso qualitativos do HyDE (N=501). 'rank' e a posicao 1-based do acordao-alvo no ranking de cada metodo; null = fora do top-10.",
+  "fontes": {
+    "corpus": "data/corpus/ementas_v2.json",
+    "hyde_docs": "data/hyde_v2_docs/hyde_v2_docs_01..05.json",
+    "resultados": [
+      "results_v2/hyde_dense_v2.json",
+      "results_v2/hyde_hybrid_v2.json",
+      "results_v2/baseline_dense_v2.json",
+      "results_v2/baseline_hybrid_v2.json",
+      "results_v2/bm25_puro_v2.json"
+    ]
+  },
+  "caso_sucesso": {
+    "rotulo": "SUCESSO",
+    "descricao_do_caso": "HyDE expandiu a descricao numa ementa hipotetica que capturou termos distintivos do header real (Execucao Fiscal/IPTU/Resolucao CNJ 547-2024/Tema 1.184 STF), levando o acordao ao TOPO (rank 1). Os demais metodos (baseline dense, baseline hibrido e BM25) nao recuperaram o doc no top-10.",
+    "indice_no_corpus": 87,
+    "numero_processo": "0920332-76.2025.8.12.0001",
+    "cdacordao": "1862520",
+    "classe": "Apelação Cível / Dívida Ativa",
+    "word_count": 913,
+    "tabela": {
+      "query_trecho_corpo": "I. CASO EM EXAME Apelação cível interposta pelo Município de Campo Grande contra sentença proferida pelo Juízo da Vara de Execução Fiscal da Fazenda Pública Municipal da Comarca de Campo Grande/MS, que extinguiu a execução fiscal, sem resolução de mérito, nos termos dos arts. 321, parágrafo único, e 485, I, do CPC. A execução fiscal foi ajuizada para cobrança de débito de IPTU, inscrito em dívida ...",
+      "hyde_generated_header": "EXECUÇÃO FISCAL. TRIBUTÁRIO. IPTU. CONCILIAÇÃO. PROTESTO. RESOLUÇÃO CNJ Nº 547/2024. TEMA 1.184 STF. PROCEDIBILIDADE. CDA. PENHORA. JUSTIFICATIVA. EFICIÊNCIA ADMINISTRATIVA. LEI Nº 6.830/1980. INICIAL. INDEFERIMENTO. CPC ART. 321, PARÁGRAFO ÚNICO. CPC ART. 485, I. RECURSO DESPROVIDO.",
+      "real_header": "DIREITO TRIBUTÁRIO E PROCESSUAL CIVIL – EXECUÇÃO FISCAL – IPTU – INDEFERIMENTO DA PETIÇÃO INICIAL – AUSÊNCIA DE COMPROVAÇÃO DE TENTATIVA PRÉVIA DE CONCILIAÇÃO E DE PROTESTO DA CDA – RESOLUÇÃO CNJ Nº 547/2024 – TEMA 1.184 E TEMA 1.428 DO STF – EXTINÇÃO SEM RESOLUÇÃO DE MÉRITO – RECURSO DESPROVIDO.",
+      "rank_hyde_dense": 1
+    },
+    "real_header_ementa": "DIREITO TRIBUTÁRIO E PROCESSUAL CIVIL – EXECUÇÃO FISCAL – IPTU – INDEFERIMENTO DA PETIÇÃO INICIAL – AUSÊNCIA DE COMPROVAÇÃO DE TENTATIVA PRÉVIA DE CONCILIAÇÃO E DE PROTESTO DA CDA – RESOLUÇÃO CNJ Nº 547/2024 – TEMA 1.184 E TEMA 1.428 DO STF – EXTINÇÃO SEM RESOLUÇÃO DE MÉRITO – RECURSO DESPROVIDO.",
+    "body_descricao": "I. CASO EM EXAME Apelação cível interposta pelo Município de Campo Grande contra sentença proferida pelo Juízo da Vara de Execução Fiscal da Fazenda Pública Municipal da Comarca de Campo Grande/MS, que extinguiu a execução fiscal, sem resolução de mérito, nos termos dos arts. 321, parágrafo único, e 485, I, do CPC. A execução fiscal foi ajuizada para cobrança de débito de IPTU, inscrito em dívida ativa sob a CDA n. 003259/24-27, no valor de R$ 3.737,32, tendo o Município indicado o próprio imóvel objeto do tributo para fins de penhora. O juízo de origem determinou a emenda da inicial para comprovação do cumprimento das exigências previstas nos arts. 2º e 3º da Resolução CNJ nº 547/2024, editada com fundamento no Tema 1.184 do STF. Diante da ausência de comprovação adequada, sobreveio sentença de indeferimento da petição inicial e extinção do feito sem julgamento do mérito. II. QUESTÃO EM DISCUSSÃO Discute-se se a execução fiscal de valor inferior a R$ 10.000,00 está condicionada à comprovação de: a) prévia tentativa de conciliação ou solução administrativa; e b) prévio protesto da Certidão de Dívida Ativa (CDA), ou justificativa fundamentada de sua inadequação. Examina-se, ainda: a) se o limite mínimo fixado por legislação municipal (R$ 3.000,00) afasta a incidência da Resolução CNJ nº 547/2024; b) se a mera indicação do imóvel à penhora supre a exigência de protesto; c) se a juntada de comprovante de protesto apenas em sede recursal é apta a sanar a irregularidade. III. RAZÕES DE DECIDIR O Supremo Tribunal Federal, ao julgar o RE nº 1.355.208/SC (Tema 1.184 da Repercussão Geral), fixou tese no sentido de que o ajuizamento da execução fiscal depende da prévia adoção de tentativa de conciliação ou solução administrativa e do protesto do título, salvo motivo de eficiência administrativa devidamente comprovado. Em cumprimento a esse entendimento, foi editada a Resolução CNJ nº 547/2024, que positivou tais exigências como condição de procedibilidade das execuções fiscais, especialmente aquelas de valor inferior a R$ 10.000,00. O STF, ao apreciar o Tema 1.428, reconheceu a plena validade da referida Resolução, assentando que suas disposições não usurpam a competência tributária dos entes federativos e devem ser observadas para o processamento e eventual extinção das execuções fiscais. No caso concreto, o valor da execução (R$ 3.737,32) é inferior ao teto de R$ 10.000,00 previsto na Resolução CNJ nº 547/2024, incidindo diretamente as exigências ali estabelecidas. O fato de a legislação municipal prever o ajuizamento de execuções fiscais acima de R$ 3.000,00 não afasta a aplicação das condições de procedibilidade fixadas pelo STF e regulamentadas pelo CNJ, pois tais exigências decorrem do princípio constitucional da eficiência administrativa (CF, art. 37, caput). A alegação de que a Lei nº 6.830/1980 exige apenas a CDA para instrução da inicial não procede. A Resolução CNJ nº 547/2024 não altera os requisitos formais da petição inicial previstos no art. 6º da LEF, mas estabelece providências prévias ao ajuizamento, como forma de racionalização da cobrança judicial. A indicação do imóvel à penhora, prevista no art. 3º, parágrafo único, III, da Resolução, não afasta automaticamente a exigência de protesto. Trata-se de hipótese subsidiária, dependente de justificativa concreta e análise judicial acerca da inadequação da medida extrajudicial. No caso, não houve comprovação de notificação prévia do contribuinte para composição, tampouco apresentação do protesto da CDA no momento oportuno. O documento comprobatório do protesto foi juntado apenas em sede recursal, de forma extemporânea, não sendo apto a suprir a ausência de requisito essencial no momento do ajuizamento da ação. Nos termos do art. 321, parágrafo único, do CPC, a não regularização da inicial no prazo de quinze dias autoriza seu indeferimento, com extinção do processo sem resolução do mérito (art. 485, I, do CPC). A orientação encontra respaldo em reiterados precedentes do TJMS, que vêm mantendo a extinção de execuções fiscais quando ausente a comprovação do protesto da CDA ou de sua inadequação, à luz da Resolução CNJ nº 547/2024 e do Tema 1.184 do STF. IV. DISPOSITIVO E TESE Recurso conhecido e desprovido. Tese de julgamento: O ajuizamento de execução fiscal de valor inferior a R$ 10.000,00 exige, nos termos do Tema 1.184 do STF e da Resolução CNJ nº 547/2024, a comprovação de prévia tentativa de conciliação ou solução administrativa e o protesto da Certidão de Dívida Ativa, salvo justificativa fundamentada de sua inadequação. A mera indicação de bem à penhora não supre, por si só, a exigência do protesto, sendo indispensável justificativa concreta acerca da inviabilidade ou ineficiência da medida extrajudicial. A juntada extemporânea de comprovante de protesto, apenas em sede recursal, não sana a ausência de requisito essencial ao ajuizamento da execução fiscal, legitimando o indeferimento da petição inicial com fundamento no art. 321, parágrafo único, c/c art. 485, I, do CPC. A C Ó R D Ã O Vistos, relatados e discutidos estes autos, ACORDAM, em sessão permanente e virtual, os(as) magistrados(as) do(a) 2ª Câmara Cível do Tribunal de Justiça de Mato Grosso do Sul, na conformidade da ata de julgamentos, a seguinte decisão: Por unanimidade, negaram provimento ao recurso, nos termos do voto do Relator.\n\n(TJMS. Apelação Cível n. 0920332-76.2025.8.12.0001,  Campo Grande,  2ª Câmara Cível, Relator (a):  Des. José Eduardo Neder Meneghelli, j: 13/03/2026, p:  17/03/2026)",
+    "hyde_geracoes_5_rodadas": [
+      "EXECUÇÃO FISCAL. TRIBUTÁRIO. IPTU. CONCILIAÇÃO. PROTESTO. RESOLUÇÃO CNJ Nº 547/2024. TEMA 1.184 STF. PROCEDIBILIDADE. CDA. PENHORA. JUSTIFICATIVA. EFICIÊNCIA ADMINISTRATIVA. LEI Nº 6.830/1980. INICIAL. INDEFERIMENTO. CPC ART. 321, PARÁGRAFO ÚNICO. CPC ART. 485, I. RECURSO DESPROVIDO.",
+      "EXECUÇÃO FISCAL. TRIBUTÁRIO. IPTU. RESolução CNJ 547/2024. TEMA 1.184 STF. CONCILIAÇÃO. PROTESTO DA CDA. INADEQUAÇÃO. EFICIÊNCIA ADMINISTRATIVA. LEGISLAÇÃO MUNICIPAL. INDICAÇÃO DE BEM À PENHORA. JUNTADA EXTEMPORÂNEA. INDEFERIMENTO DA PETIÇÃO INICIAL. RECURSO DESPROVIDO.",
+      "EXECUÇÃO FISCAL. EXECUÇÃO FISCAL. TRIBUTÁRIO. IPTU. CONCILIAÇÃO. SOLUÇÃO ADMINISTRATIVA. PROTESTO. CERTIDÃO DE DÍVIDA ATIVA. CDA. RESolução CNJ Nº 547/2024. TEMA 1.184 STF. PROCEDIBILIDADE. INADEQUAÇÃO. EFICIÊNCIA ADMINISTRATIVA. LEI Nº 6.830/1980. PENHORA. EXCEÇÃO. JUNTADA EXTEMPORÂNEA. CPC. ART. 321, PARÁGRAFO ÚNICO. ART. 485, I. RECURSO DESPROVIDO.",
+      "EXECUÇÃO FISCAL. IPTU. RESolução CNJ Nº 547/2024. TEMA 1.184 STF. CONCILIAÇÃO. PROTESTO DA CDA. EFICIÊNCIA ADMINISTRATIVA. INDICAÇÃO DO IMÓVEL À PENHORA. JUNTADA EXTEMPORÂNEA. INDEFERIMENTO DA PETIÇÃO INICIAL. RECURSO DESPROVIDO.",
+      "EXECUÇÃO FISCAL. TRIBUTÁRIO. IPTU. RESolução CNJ 547/2024. TEMA 1.184 STF. CONCILIAÇÃO. PROTESTO DA CDA. INADIMPLEMENTO. INDICAÇÃO DE BEM À PENHORA. JUNTADA EXTEMPORÂNEA. INDEFERIMENTO DA PETIÇÃO INICIAL. RECURSO DESPROVIDO."
+    ],
+    "nota_recuperacao": "A recuperacao HyDE usa a MEDIA L2-normalizada dos embeddings das 5 geracoes; nenhum texto isolado e 'a' query. As 5 geracoes estao listadas em hyde_geracoes_5_rodadas.",
+    "ranks_por_metodo": {
+      "hyde_dense_v2": {
+        "rank": 1,
+        "metodo": "HyDE + Dense (metodo do estudo)"
+      },
+      "hyde_hybrid_v2": {
+        "rank": 1,
+        "metodo": "HyDE + Hibrido (dense + BM25)"
+      },
+      "baseline_dense_v2": {
+        "rank": null,
+        "metodo": "Baseline Dense (descricao crua como query)"
+      },
+      "baseline_hybrid_v2": {
+        "rank": null,
+        "metodo": "Baseline Hibrido"
+      },
+      "bm25_puro_v2": {
+        "rank": null,
+        "metodo": "BM25 puro (lexico)"
+      }
+    }
+  },
+  "caso_falha": {
+    "rotulo": "FALHA",
+    "descricao_do_caso": "HyDE 'se perdeu': as 5 geracoes alucinaram o enquadramento juridico (abrindo com 'FINS E INVESTIMENTOS'/'FINANCAS', termo em espanhol 'CADENA DE', e ruido 'JURUS/JURISTAS DE MORA'), desviando de uma acao de descontos indevidos em beneficio previdenciario / relacao de consumo. O acordao caiu fora do top-10 no HyDE, enquanto baseline dense, baseline hibrido e BM25 acertaram em rank 1.",
+    "indice_no_corpus": 132,
+    "numero_processo": "0808597-35.2025.8.12.0002",
+    "cdacordao": "1862676",
+    "classe": "Apelação Cível / Desconto em Folha de Pagamento/Benefício Previdenciário",
+    "word_count": 565,
+    "tabela": {
+      "query_trecho_corpo": "CASO EM EXAME Apelações cíveis interpostas por instituição financeira e por consumidor aposentado contra sentença que declarou a inexistência de relação jurídica relativa a descontos efetuados em benefício previdenciário, condenando os réus à restituição em dobro dos valores indevidamente descontados, afastando o dano moral e aplicando multa por litigância de má-fé ao banco. QUESTÃO EM DISCUSSÃO (...",
+      "hyde_generated_header": "FINANCAS. CONSUMIDOR. RELACAO DE CONSUMO. RESPONSABILIDADE OBJETIVA. DESCONTOS INDEVIDOS. BENEFICIO PREVIDENCIARIO. RESTITUICAO EM DOBRO. DANOS MORAIS. JURUS DE MORA. HONORARIOS ADVOCATICIOS. LITISPENDENCIA DE MA FE.",
+      "real_header": "APELAÇÕES CÍVEIS – AÇÃO DECLARATÓRIA DE INEXISTÊNCIA DE DÉBITO C/C RESTITUIÇÃO DE VALORES E INDENIZAÇÃO POR DANOS MORAIS – DESCONTOS INDEVIDOS EM BENEFÍCIO PREVIDENCIÁRIO – SERVIÇO NÃO CONTRATADO – RELAÇÃO DE CONSUMO – RESPONSABILIDADE OBJETIVA – PRELIMINAR DE ILEGITIMIDADE PASSIVA REJEITADA – INSTITUIÇÃO FINANCEIRA INTEGRANTE DA CADEIA DE CONSUMO – RESTITUIÇÃO EM DOBRO – ART. 42, PARÁGRAFO ÚNICO, DO CDC – TEMA 929 DO STJ – DANO MORAL CONFIGURADO – VERBA ALIMENTAR – PESSOA IDOSA – QUANTUM FIXADO COM OBSERVÂNCIA AOS PRINCÍPIOS DA RAZOABILIDADE E PROPORCIONALIDADE – JUROS DE MORA DESDE O EVENTO DANOSO – SÚMULA 54 DO STJ – HONORÁRIOS DE SUCUMBÊNCIA – MAJORAÇÃO EM GRAU RECURSAL – ART. 85, §11, DO CPC – RECURSO DO BANCO DESPROVIDO – RECURSO DO AUTOR PARCIALMENTE PROVIDO.",
+      "rank_hyde_dense": null
+    },
+    "real_header_ementa": "APELAÇÕES CÍVEIS – AÇÃO DECLARATÓRIA DE INEXISTÊNCIA DE DÉBITO C/C RESTITUIÇÃO DE VALORES E INDENIZAÇÃO POR DANOS MORAIS – DESCONTOS INDEVIDOS EM BENEFÍCIO PREVIDENCIÁRIO – SERVIÇO NÃO CONTRATADO – RELAÇÃO DE CONSUMO – RESPONSABILIDADE OBJETIVA – PRELIMINAR DE ILEGITIMIDADE PASSIVA REJEITADA – INSTITUIÇÃO FINANCEIRA INTEGRANTE DA CADEIA DE CONSUMO – RESTITUIÇÃO EM DOBRO – ART. 42, PARÁGRAFO ÚNICO, DO CDC – TEMA 929 DO STJ – DANO MORAL CONFIGURADO – VERBA ALIMENTAR – PESSOA IDOSA – QUANTUM FIXADO COM OBSERVÂNCIA AOS PRINCÍPIOS DA RAZOABILIDADE E PROPORCIONALIDADE – JUROS DE MORA DESDE O EVENTO DANOSO – SÚMULA 54 DO STJ – HONORÁRIOS DE SUCUMBÊNCIA – MAJORAÇÃO EM GRAU RECURSAL – ART. 85, §11, DO CPC – RECURSO DO BANCO DESPROVIDO – RECURSO DO AUTOR PARCIALMENTE PROVIDO.",
+    "body_descricao": "CASO EM EXAME Apelações cíveis interpostas por instituição financeira e por consumidor aposentado contra sentença que declarou a inexistência de relação jurídica relativa a descontos efetuados em benefício previdenciário, condenando os réus à restituição em dobro dos valores indevidamente descontados, afastando o dano moral e aplicando multa por litigância de má-fé ao banco. QUESTÃO EM DISCUSSÃO (i) Ilegitimidade passiva da instituição financeira por alegada atuação como mera intermediária; (ii) responsabilidade civil por descontos indevidos em benefício previdenciário; (iii) cabimento da restituição em dobro; (iv) configuração de dano moral; (v) termo inicial dos juros de mora; (vi) redistribuição e majoração dos honorários advocatícios. RAZÕES DE DECIDIR Em se tratando de relação de consumo, aplica-se a responsabilidade objetiva prevista no art. 14 do CDC, sendo solidária a responsabilidade dos integrantes da cadeia de fornecimento (arts. 7º, parágrafo único, e 18 do CDC). A instituição financeira que efetua descontos em conta de consumidor sem comprovação da contratação válida responde pelos vícios do serviço, não se desincumbindo do ônus probatório que lhe incumbia (art. 373, II, CPC). Demonstrada a inexistência de relação jurídica, é devida a restituição em dobro dos valores indevidamente descontados, por violação à boa-fé objetiva, nos termos do art. 42, parágrafo único, do CDC, conforme entendimento consolidado no Tema 929 do STJ e modulação dos efeitos a partir de 30/03/2021. Os descontos indevidos incidentes sobre benefício previdenciário de caráter alimentar, percebido por pessoa idosa e de baixa renda, extrapolam o mero aborrecimento, configurando dano moral indenizável. O quantum indenizatório deve observar as funções compensatória e pedagógica da indenização, bem como os princípios da razoabilidade e proporcionalidade, adequando-se ao entendimento do colegiado. Os juros de mora incidem desde o evento danoso, por se tratar de responsabilidade extracontratual (Súmula 54 do STJ). Mantidos os honorários fixados na origem e majorados em grau recursal, nos termos do art. 85, §11, do CPC. DISPOSITIVO Recurso do Banco Bradesco S/A conhecido e desprovido. Recurso de Edvaldo Pereira conhecido e parcialmente provido para condenar solidariamente os réus ao pagamento de indenização por danos morais no valor de R$ 2.800,00, acrescida de juros de mora desde o evento danoso, mantendo-se a restituição em dobro dos valores descontados. Redistribuídos os ônus sucumbenciais e majorados os honorários advocatícios em grau recursal. TESE A instituição financeira que integra a cadeia de consumo responde solidariamente por descontos indevidos realizados em benefício previdenciário, sendo devida a restituição em dobro quando ausente engano justificável e configurado o dano moral quando a verba alimentar é indevidamente suprimida, com juros de mora desde o evento danoso.\n\n(TJMS. Apelação Cível n. 0808597-35.2025.8.12.0002,  Dourados,  2ª Câmara Cível, Relator (a):  Des. José Eduardo Neder Meneghelli, j: 13/03/2026, p:  17/03/2026)",
+    "hyde_geracoes_5_rodadas": [
+      "FINANCAS. CONSUMIDOR. RELACAO DE CONSUMO. RESPONSABILIDADE OBJETIVA. DESCONTOS INDEVIDOS. BENEFICIO PREVIDENCIARIO. RESTITUICAO EM DOBRO. DANOS MORAIS. JURUS DE MORA. HONORARIOS ADVOCATICIOS. LITISPENDENCIA DE MA FE.",
+      "FINS E INVESTIMENTOS. RELAÇÃO DE CONSUMO. RESPONSABILIDADE OBJETIVA. DESCONTOS INDEVIDOS. BENEFÍCIO PREVIDENCIÁRIO. RESTITUIÇÃO EM DOBRO. DANO MORAL. JURUS DE MORA. HONORÁRIOS ADVOCATÍCIOS. CADENA DE FORNECIMENTO. BOA-FÉ OBJETIVA. EVENTO DANOSO.",
+      "FINS E INVESTIMENTOS. RELAÇÃO DE CONSUMO. RESPONSABILIDADE OBJETIVA. DESCONTOS INDEVIDOS. BENEFÍCIO PREVIDENCIÁRIO. RESTITUIÇÃO EM DOBRO. DANO MORAL. JURISTAS DE MORA. HONORÁRIOS ADVOCATÍCIOS. SUCUMBENCIAIS. REDISTRIBUIÇÃO.",
+      "FINS E INVESTIMENTOS. RELAÇÃO DE CONSUMO. RESPONSABILIDADE OBJETIVA. DESCONTOS INDEVIDOS. BENEFÍCIO PREVIDENCIÁRIO. RESTITUIÇÃO EM DOBRO. DANO MORAL. JURUS DE MORA. HONORÁRIOS ADVOCATÍCIOS. SUCUMBENCIAIS. RECURSO NÃO PROVIDO. PARCIALMENTE PROVIDO. TESE JURÍDICA.",
+      "FINS E INVESTIMENTOS. RELAÇÃO DE CONSUMO. RESPONSABILIDADE OBJETIVA. DESCONTOS INDEVIDOS. BENEFÍCIO PREVIDENCIÁRIO. RESTITUIÇÃO EM DOBRO. DANO MORAL. JURUS DE MORA. HONORÁRIOS ADVOCATÍCIOS. REDISTRIBUIÇÃO. MULTA POR LITISGANÇA DE MÁ-FÉ. RECURSO DESPROVIDO. RECURSO PARCIALMENTE PROVIDO."
+    ],
+    "nota_recuperacao": "A recuperacao HyDE usa a MEDIA L2-normalizada dos embeddings das 5 geracoes; nenhum texto isolado e 'a' query. As 5 geracoes estao listadas em hyde_geracoes_5_rodadas.",
+    "ranks_por_metodo": {
+      "hyde_dense_v2": {
+        "rank": null,
+        "metodo": "HyDE + Dense (metodo do estudo)"
+      },
+      "hyde_hybrid_v2": {
+        "rank": 5,
+        "metodo": "HyDE + Hibrido (dense + BM25)"
+      },
+      "baseline_dense_v2": {
+        "rank": 1,
+        "metodo": "Baseline Dense (descricao crua como query)"
+      },
+      "baseline_hybrid_v2": {
+        "rank": 1,
+        "metodo": "Baseline Hibrido"
+      },
+      "bm25_puro_v2": {
+        "rank": 1,
+        "metodo": "BM25 puro (lexico)"
+      }
+    }
+  }
+}

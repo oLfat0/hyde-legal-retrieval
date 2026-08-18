@@ -1,0 +1,84 @@
+{
+  "corpus": {
+    "fonte": "data/corpus/ementas_v2.json",
+    "total_decisoes": 501,
+    "periodo": {
+      "ano_inicial": 2003,
+      "ano_final": 2026
+    }
+  },
+  "header_ementa": {
+    "descricao": "Palavras-chave / headnote (campo 'ementa', indexado no FAISS)",
+    "tamanho_medio_palavras": 64.0,
+    "mediana_palavras": 50,
+    "minimo_palavras": 19,
+    "maximo_palavras": 307
+  },
+  "body_descricao": {
+    "descricao": "Corpo estruturado do acordao (campo 'descricao', usado como query)",
+    "tamanho_medio_palavras": 656.6,
+    "mediana_palavras": 606,
+    "minimo_palavras": 390,
+    "maximo_palavras": 1723
+  },
+  "classes_processuais": {
+    "quantidade_distintas": 14,
+    "top_5": {
+      "Apelação Cível": 229,
+      "Apelação Criminal": 144,
+      "Agravo Interno Cível": 30,
+      "Embargos de Declaração Criminal": 26,
+      "Embargos de Declaração Cível": 20
+    }
+  },
+  "areas_do_direito": {
+    "descricao": "Ramo do direito extraido do cabecalho 'DIREITO ...' da ementa",
+    "area_predominante": "Processual Civil",
+    "area_predominante_n": 201,
+    "area_predominante_pct(%)": 40.1,
+    "ramos_individuais": {
+      "quantidade_distintas": 28,
+      "ranking": {
+        "Processual Civil": 201,
+        "Penal": 155,
+        "Tributário": 154,
+        "Processual Penal": 153,
+        "Civil": 41,
+        "Do Consumidor": 35,
+        "Administrativo": 16,
+        "Constitucional": 9,
+        "Bancário": 7,
+        "Previdenciário": 4,
+        "Ambiental": 3,
+        "Empresarial": 3,
+        "De Execução Penal": 3,
+        "À Saúde": 2,
+        "Responsabilidade Civil": 1,
+        "Securitário": 1,
+        "Das Sucessões": 1,
+        "Ao Esquecimento": 1,
+        "De Recorrer Em Liberdade": 1,
+        "Execução Penal": 1,
+        "Processual Penal Militar": 1,
+        "Ao Silêncio Observado": 1,
+        "Administrativo Militar": 1,
+        "Ao Silêncio": 1,
+        "Penal Militar": 1,
+        "Processo Penal Militar": 1,
+        "De Regresso": 1,
+        "Direito": 1
+      }
+    },
+    "ramos_compostos": {
+      "quantidade_distintas": 52,
+      "indefinido_n": 43,
+      "top_5": {
+        "Direito Penal E Processual Penal": 135,
+        "Direito Processual Civil E Tributário": 82,
+        "Indefinido": 43,
+        "Direito Tributário E Processual Civil": 38,
+        "Direito Tributário": 33
+      }
+    }
+  }
+}
