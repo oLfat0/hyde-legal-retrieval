@@ -1,0 +1,502 @@
+idx,cdacordao,classe,rank_bm25,rank_dense,rank_hyde,rank_hybrid,rank_basehyb
+0,1863427,Agravo Interno Cível / Aposentadoria Especial (Art. 57/8),6.0,10.0,1.0,1.0,4.0
+1,1863439,Agravo Interno Cível / Práticas Abusivas,1.0,,1.0,1.0,3.0
+2,1863459,Agravo Interno Cível / Auxílio-Doença Acidentário,3.0,6.0,2.0,2.0,4.0
+3,1863462,Agravo Interno Cível / Dívida Ativa,,,2.0,3.0,
+4,1863467,Apelação Cível / Efeito Suspensivo / Impugnação / Embargos à Execução,1.0,4.0,1.0,1.0,2.0
+5,1863472,Apelação Cível / Dívida Ativa,3.0,,4.0,4.0,6.0
+6,1863498,Agravo de Instrumento / Concurso Público - Nomeação/Posse Tardia,1.0,,1.0,1.0,6.0
+7,1863504,Agravo Interno Cível / Contratos Bancários,1.0,,2.0,2.0,2.0
+8,1863524,Apelação Cível / Obrigação de Fazer / Não Fazer,1.0,,1.0,1.0,5.0
+9,1863548,Apelação Cível / Evicção ou Vicio Redibitório,1.0,,1.0,1.0,3.0
+10,1863554,Apelação / Remessa Necessária / FGTS/Fundo de Garantia Por Tempo de Serviço,1.0,,2.0,1.0,2.0
+11,1863555,Apelação Cível / Penhora / Depósito/ Avaliação,1.0,,1.0,1.0,2.0
+12,1863564,Apelação Cível / Dívida Ativa,8.0,,5.0,3.0,
+13,1863579,Apelação Cível / PASEP,1.0,,4.0,1.0,5.0
+14,1863584,Apelação Cível / Alienação Fiduciária,1.0,4.0,1.0,1.0,1.0
+15,1863592,Apelação Cível / Inclusão Indevida em Cadastro de Inadimplentes,1.0,,3.0,1.0,2.0
+16,1863598,Apelação Cível / Contratos Bancários,2.0,,3.0,1.0,4.0
+17,1863605,"Apelação Cível / Revisão de Juros Remuneratórios, Capitalização/Anatocismo",2.0,,7.0,2.0,4.0
+18,1863611,Apelação Cível / Inclusão Indevida em Cadastro de Inadimplentes,1.0,,,2.0,4.0
+19,1863619,Apelação Cível / Dívida Ativa,,,,,
+20,1863620,Apelação Cível / Dívida Ativa,,,7.0,,
+21,1863626,Apelação Cível / Dívida Ativa,,,3.0,5.0,
+22,1863627,Apelação Cível / Promessa de Compra e Venda,1.0,2.0,1.0,1.0,1.0
+23,1863634,Apelação Cível / Dívida Ativa,1.0,2.0,5.0,3.0,1.0
+24,1863640,Apelação Cível / Inclusão Indevida em Cadastro de Inadimplentes,1.0,6.0,1.0,1.0,3.0
+25,1863641,Apelação Cível / Dívida Ativa,,,8.0,,
+26,1863647,Apelação Cível / Dívida Ativa,1.0,,,2.0,2.0
+27,1863648,Apelação Cível / Dívida Ativa,,,2.0,3.0,
+28,1863654,Apelação Cível / Dívida Ativa,1.0,,3.0,1.0,2.0
+29,1862307,Embargos de Declaração Criminal / Crimes de Trânsito,1.0,,,2.0,3.0
+30,1862351,Agravo Interno Cível / Obrigação de Fazer / Não Fazer,,,4.0,8.0,
+31,1862357,Agravo Interno Cível / Urgência,,,4.0,8.0,
+32,1862366,Agravo Interno Cível / Incapacidade Laborativa Permanente,1.0,1.0,,3.0,1.0
+33,1862383,"Agravo Interno Cível / Defeito, nulidade ou anulação",1.0,,2.0,1.0,2.0
+34,1862417,Agravo Interno Cível / Dívida Ativa,,,,,
+35,1862438,Apelação Cível / Obrigação de Fazer / Não Fazer,1.0,,1.0,1.0,6.0
+36,1862446,Apelação Cível / Incapacidade Laborativa Permanente,1.0,,1.0,1.0,5.0
+37,1862447,Agravo de Instrumento / Multa Cominatória / Astreintes,1.0,1.0,2.0,1.0,1.0
+38,1862458,Embargos de Declaração Cível / Contratos Bancários,1.0,,1.0,1.0,2.0
+39,1862465,Apelação Cível / Dívida Ativa,,,,,
+40,1862467,Apelação Cível / Dívida Ativa,,,,,
+41,1862503,Agravo Interno Cível / Provas em geral,1.0,5.0,2.0,2.0,1.0
+42,1856357,Agravo de Instrumento / Extinção da Execução,1.0,1.0,1.0,1.0,1.0
+43,1856386,Apelação Cível / Seguro,1.0,1.0,3.0,1.0,1.0
+44,1856509,Revisão Criminal / Tráfico de Drogas e Condutas Afins,,,,,
+45,1856531,Embargos de Declaração Cível / Perdas e Danos,1.0,7.0,1.0,1.0,1.0
+46,1856537,Embargos de Declaração Cível / Crédito Direto ao Consumidor - CDC,1.0,,1.0,1.0,2.0
+47,1856552,Apelação Cível / Dívida Ativa,,,,,
+48,1856618,Apelação Criminal / Furto,,,8.0,,
+49,1848860,Apelação Criminal / Tráfico de Drogas e Condutas Afins,7.0,,6.0,1.0,
+50,1863426,"Apelação Cível / Defeito, nulidade ou anulação",2.0,6.0,,4.0,2.0
+51,1863430,Apelação Cível / Contratos Bancários,1.0,1.0,,3.0,1.0
+52,1863444,Agravo de Instrumento / Prescrição e Decadência,1.0,1.0,,2.0,1.0
+53,1863457,Apelação Cível / Serviços de Saúde,1.0,1.0,,2.0,1.0
+54,1863473,Apelação Cível / Dano Ambiental,1.0,1.0,,4.0,1.0
+55,1863476,Apelação Cível / Imunidade de Execução,1.0,1.0,,2.0,1.0
+56,1863477,Apelação Cível / Práticas Abusivas,1.0,1.0,,2.0,1.0
+57,1863508,Apelação Cível / Obrigação de Fazer / Não Fazer,1.0,1.0,,3.0,1.0
+58,1863581,Apelação Cível / Contratos Bancários,1.0,,1.0,1.0,7.0
+59,1863633,Apelação Cível / Padronizado,2.0,7.0,2.0,2.0,1.0
+60,1863655,Apelação Cível / Dívida Ativa,1.0,,,5.0,3.0
+61,1863656,Apelação Cível / Dívida Ativa,1.0,1.0,1.0,1.0,1.0
+62,1863657,Apelação Cível / Dívida Ativa,,,,,
+63,1863658,Apelação Cível / Dívida Ativa,7.0,,6.0,5.0,
+64,1863664,Apelação Cível / Dívida Ativa,2.0,,2.0,2.0,4.0
+65,1863667,Apelação Cível / Dívida Ativa,8.0,,,,
+66,1863674,Apelação / Remessa Necessária / Internação/Transferência Hospitalar,1.0,1.0,1.0,1.0,1.0
+67,1863683,Apelação Cível / Acidente de Trânsito,1.0,,1.0,1.0,5.0
+68,1863688,Apelação Cível / Ação Anulatória,1.0,,1.0,1.0,3.0
+69,1863692,Apelação Cível / Acidente de Trânsito,1.0,,1.0,1.0,6.0
+70,1863762,Apelação Cível / Práticas Abusivas,1.0,,,4.0,2.0
+71,1862914,Embargos de Declaração Cível / Efeito Suspensivo / Impugnação / Embargos à Execução,1.0,1.0,1.0,1.0,1.0
+72,1862915,Apelação Cível / Obrigação de Fazer / Não Fazer,1.0,10.0,1.0,1.0,3.0
+73,1862923,Apelação Cível / Marca,1.0,1.0,1.0,1.0,1.0
+74,1862979,Apelação Cível / Práticas Abusivas,9.0,,,,
+75,1863006,Apelação Cível / Contratos Bancários,4.0,,3.0,3.0,8.0
+76,1863007,Apelação Cível / Contratos Bancários,3.0,,2.0,2.0,6.0
+77,1863013,Apelação Cível / Contratos Bancários,1.0,8.0,,2.0,3.0
+78,1863016,Apelação Cível / Contratos Bancários,5.0,,,10.0,10.0
+79,1863022,Apelação Cível / Obrigação de Fazer / Não Fazer,1.0,5.0,,3.0,2.0
+80,1863036,Apelação Cível / Dívida Ativa,,,,,
+81,1863039,Apelação Cível / Rescisão do contrato e devolução do dinheiro,1.0,,2.0,1.0,4.0
+82,1863079,Apelação Cível / Contratos Bancários,1.0,,2.0,1.0,3.0
+83,1862294,Agravo Interno Cível / Fornecimento de medicamentos,,,3.0,6.0,
+84,1862295,Agravo Interno Cível / Padronizado,,,2.0,4.0,
+85,1862476,Apelação Cível / Dívida Ativa,,,,,
+86,1862519,Apelação Cível / Dívida Ativa,,,,,
+87,1862520,Apelação Cível / Dívida Ativa,,,1.0,1.0,
+88,1862524,Embargos de Declaração Cível / Contratos Bancários,2.0,,8.0,1.0,4.0
+89,1862527,Apelação Cível / Dívida Ativa,7.0,,,,
+90,1862528,Apelação Cível / Dívida Ativa,,,,,
+91,1862533,Apelação Cível / Dívida Ativa,,,,,
+92,1862541,"Embargos de Declaração Cível / Revisão de Juros Remuneratórios, Capitalização/Anatocismo",10.0,,,,
+93,1862549,Apelação Cível / Dívida Ativa,6.0,,3.0,2.0,
+94,1862551,Apelação Cível / Dívida Ativa,5.0,,,10.0,
+95,1862552,Apelação Cível / Dívida Ativa,,,4.0,7.0,
+96,1862553,Apelação Cível / Dívida Ativa,,,,,
+97,1862561,Apelação Cível / Dívida Ativa,1.0,,,2.0,2.0
+98,1862567,Apelação Cível / Dívida Ativa,,,,,
+99,1862574,Apelação Cível / Dívida Ativa,,,4.0,7.0,
+100,1862575,Apelação Cível / Dívida Ativa,,,3.0,5.0,
+101,1862578,Apelação Cível / Dívida Ativa,,9.0,,,
+102,1862579,Apelação Cível / Dívida Ativa,6.0,8.0,,,4.0
+103,1862580,Apelação Cível / Dívida Ativa,7.0,7.0,,,5.0
+104,1862584,Embargos de Declaração Cível / Alienação Fiduciária,1.0,,,3.0,2.0
+105,1862585,Apelação Cível / Dívida Ativa,,,,,
+106,1862586,Apelação Cível / Dívida Ativa,,,,,
+107,1862587,Apelação Cível / Dívida Ativa,3.0,,,6.0,6.0
+108,1862588,Apelação Cível / Dívida Ativa,8.0,7.0,,,4.0
+109,1862589,Apelação Cível / Dívida Ativa,9.0,6.0,,,2.0
+110,1862590,Apelação Cível / IPTU/ Imposto Predial e Territorial Urbano,6.0,,,7.0,
+111,1862591,Apelação Cível / Incapacidade Laborativa Permanente,1.0,2.0,1.0,1.0,1.0
+112,1862599,Apelação Cível / Dívida Ativa,3.0,,7.0,2.0,6.0
+113,1862600,Apelação Cível / Dívida Ativa,7.0,2.0,5.0,6.0,4.0
+114,1862601,Apelação Cível / Irregularidade no atendimento,1.0,1.0,1.0,1.0,1.0
+115,1862611,Apelação Cível / Dívida Ativa,,,,,
+116,1862612,Apelação Cível / Dívida Ativa,,,,,
+117,1862614,Apelação Cível / Dívida Ativa,,,,,
+118,1862620,Apelação Cível / Dívida Ativa,,,,,
+119,1862622,Apelação Cível / Dívida Ativa,,,,,
+120,1862630,Apelação Cível / Dívida Ativa,,,6.0,,
+121,1862635,Apelação Cível / Alienação Fiduciária,1.0,,1.0,1.0,3.0
+122,1862636,Apelação Cível / Dívida Ativa,,,,,
+123,1862637,Apelação Cível / Dívida Ativa,6.0,,1.0,1.0,
+124,1862638,Apelação Cível / Obrigação de Fazer / Não Fazer,1.0,,1.0,1.0,2.0
+125,1862649,Apelação Cível / Dívida Ativa,,,,,
+126,1862657,Apelação Cível / Práticas Abusivas,1.0,,,3.0,6.0
+127,1862660,Apelação Cível / Contratos Bancários,1.0,,1.0,1.0,2.0
+128,1862665,Apelação Cível / Dívida Ativa,,,,,
+129,1862667,Apelação Cível / Dívida Ativa,,,,,
+130,1862668,Apelação Cível / Dívida Ativa,7.0,,,9.0,
+131,1862669,Apelação Cível / Dívida Ativa,,,,,
+132,1862676,Apelação Cível / Desconto em Folha de Pagamento/Benefício Previdenciário,1.0,1.0,,5.0,1.0
+133,1862680,Apelação Cível / Dívida Ativa,,,,,
+134,1862681,Apelação Cível / Dívida Ativa,,,4.0,7.0,
+135,1862683,Apelação Cível / Fornecimento de medicamentos,1.0,1.0,1.0,1.0,1.0
+136,1862684,"Apelação Cível / Defeito, nulidade ou anulação",1.0,,1.0,1.0,4.0
+137,1862689,Apelação Cível / Dívida Ativa,,,,,
+138,1862692,Apelação Cível / Dívida Ativa,,5.0,,,
+139,1862693,Apelação Cível / Dívida Ativa,10.0,4.0,,,1.0
+140,1862694,Apelação Cível / Dívida Ativa,,3.0,,,10.0
+141,1862695,Apelação Cível / Dívida Ativa,,2.0,,,8.0
+142,1862697,Apelação Cível / Dívida Ativa,,,,,
+143,1862698,Apelação Cível / Dívida Ativa,,,,,
+144,1862700,Apelação Cível / Descontos dos benefícios,1.0,5.0,1.0,1.0,2.0
+145,1862701,Apelação Cível / Contratos Bancários,1.0,,1.0,1.0,3.0
+146,1862703,Apelação Cível / Dívida Ativa,,,,,
+147,1862711,Apelação Cível / Dívida Ativa,,,,,
+148,1862712,Apelação Cível / Dívida Ativa,,,,,
+149,1862713,Apelação Cível / Contratos Bancários,1.0,,4.0,1.0,6.0
+150,1862717,Apelação Cível / Dívida Ativa,5.0,,,10.0,
+151,1861238,Agravo Interno Cível / Prescrição,1.0,4.0,1.0,1.0,1.0
+152,1861243,"Apelação Cível / Defeito, nulidade ou anulação",1.0,,,2.0,2.0
+153,1861248,Apelação Cível / Seguro,1.0,,1.0,1.0,4.0
+154,1861281,Embargos de Declaração Cível / Seguro,1.0,,3.0,1.0,2.0
+155,1861288,Agravo Interno Cível / Cédula de Crédito Bancário,1.0,,,3.0,3.0
+156,1861306,Embargos de Declaração Cível / ITBI - Imposto de Transmissão Intervivos de Bens Móveis e Imóveis,1.0,2.0,1.0,1.0,1.0
+157,1861325,Agravo de Instrumento / Adicional de Horas Extras,1.0,1.0,1.0,1.0,1.0
+158,1861343,Apelação Cível / Rescisão do contrato e devolução do dinheiro,1.0,,1.0,1.0,2.0
+159,1861349,Agravo de Instrumento / Contratos Bancários,1.0,,1.0,1.0,2.0
+160,1861352,Apelação Cível / Práticas Abusivas,1.0,,,2.0,2.0
+161,1861355,Agravo de Instrumento / Inventário e Partilha,1.0,,1.0,1.0,6.0
+162,1861358,Agravo de Instrumento / Imissão na Posse,1.0,1.0,1.0,1.0,1.0
+163,1861398,Embargos de Declaração Cível / Efeito Suspensivo / Impugnação / Embargos à Execução,1.0,2.0,2.0,1.0,1.0
+164,1861405,Apelação / Remessa Necessária / Internação compulsória,1.0,,1.0,1.0,5.0
+165,1861421,Apelação Cível / Despesas Condominiais,1.0,,1.0,1.0,2.0
+166,1861458,Agravo de Instrumento / Tutela de Urgência,1.0,,,3.0,6.0
+167,1861477,Apelação Cível / Descontos dos benefícios,1.0,,1.0,1.0,5.0
+168,1861506,Apelação Cível / Alienação Fiduciária,2.0,,4.0,1.0,4.0
+169,1861534,Apelação Cível / Contratos Bancários,1.0,2.0,1.0,1.0,1.0
+170,1861538,"Apelação Cível / Defeito, nulidade ou anulação",1.0,4.0,3.0,1.0,1.0
+171,1861562,Apelação Cível / Eletiva,1.0,,1.0,1.0,4.0
+172,1861567,Apelação Cível / Contratos Bancários,1.0,6.0,1.0,1.0,1.0
+173,1861591,Apelação Cível / Perdas e Danos,1.0,,1.0,1.0,5.0
+174,1861594,Apelação Cível / Obrigação de Fazer / Não Fazer,1.0,,2.0,2.0,3.0
+175,1863415,"Agravo Interno Cível / Reajustes de Remuneração, Proventos ou Pensão",1.0,1.0,1.0,1.0,1.0
+176,1863422,"Agravo Interno Cível / Defeito, nulidade ou anulação",1.0,3.0,1.0,1.0,1.0
+177,1863442,Agravo Interno Cível / Inclusão Indevida em Cadastro de Inadimplentes,4.0,2.0,1.0,2.0,3.0
+178,1863447,Agravo Interno Cível / Inclusão Indevida em Cadastro de Inadimplentes,1.0,2.0,5.0,2.0,1.0
+179,1863483,Agravo Interno Cível / Alienação Fiduciária,1.0,1.0,2.0,1.0,1.0
+180,1863502,Agravo Interno Cível / Assistência Judiciária Gratuita,1.0,,1.0,1.0,2.0
+181,1863507,Agravo de Instrumento / Liminar,1.0,,1.0,1.0,6.0
+182,1863695,Embargos de Declaração Cível / Honorários Advocatícios,1.0,5.0,1.0,1.0,1.0
+183,1862908,Embargos de Declaração Cível / Inclusão Indevida em Cadastro de Inadimplentes,1.0,1.0,2.0,1.0,1.0
+184,1862911,Apelação Criminal / Tráfico de Drogas e Condutas Afins,,,3.0,5.0,
+185,1862932,Embargos de Declaração Criminal / Tráfico de Drogas e Condutas Afins,1.0,,6.0,1.0,4.0
+186,1862331,Embargos de Declaração Criminal / Coação no curso do processo,1.0,6.0,1.0,1.0,1.0
+187,1862374,Apelação Criminal / Tráfico de Drogas e Condutas Afins,1.0,5.0,,3.0,2.0
+188,1862384,Apelação Criminal / Homicídio Qualificado,1.0,,1.0,1.0,6.0
+189,1862433,Agravo de Instrumento / Recuperação extrajudicial,1.0,1.0,1.0,1.0,1.0
+190,1862464,Agravo de Instrumento / Contratos Bancários,1.0,,1.0,1.0,2.0
+191,1862629,Agravo de Execução Penal / Transferência de Preso,1.0,5.0,8.0,1.0,1.0
+192,1862661,Apelação Criminal / Tráfico de Drogas e Condutas Afins,1.0,,,2.0,5.0
+193,1861253,Embargos de Declaração Criminal / Adulteração de Sinal Identificador de Veículo Automotor,1.0,,,2.0,3.0
+194,1861274,Embargos de Declaração Cível / Fato Atípico,1.0,5.0,1.0,1.0,1.0
+195,1861347,"Embargos de Declaração Cível / Defeito, nulidade ou anulação",1.0,3.0,1.0,1.0,1.0
+196,1861392,Agravo de Instrumento / Penhora / Depósito/ Avaliação,4.0,,3.0,2.0,8.0
+197,1861406,Agravo de Instrumento / Ausência de Legitimidade para a Causa,1.0,,1.0,1.0,4.0
+198,1861475,Embargos de Declaração Criminal / Regressão de Regime,1.0,,1.0,1.0,3.0
+199,1861597,Apelação Cível / Descontos dos benefícios,5.0,,1.0,1.0,10.0
+200,1861651,"Apelação Cível / Defeito, nulidade ou anulação",1.0,3.0,1.0,1.0,1.0
+201,1861673,Apelação Cível / Dívida Ativa,2.0,,,4.0,4.0
+202,1861690,Apelação Cível / Dívida Ativa,6.0,,,,
+203,1861698,Apelação Cível / Urgência,1.0,,1.0,1.0,2.0
+204,1861699,Apelação Cível / Dívida Ativa,5.0,,,10.0,10.0
+205,1861715,Apelação Cível / Dívida Ativa,4.0,,,8.0,8.0
+206,1861716,Apelação Cível / Dívida Ativa,3.0,,,6.0,6.0
+207,1861730,Apelação Cível / Dívida Ativa,,,,,
+208,1861731,Apelação Cível / Dívida Ativa,,,,,
+209,1861747,Apelação Cível / Dívida Ativa,,,,,
+210,1861764,Apelação Cível / Dívida Ativa,,,,,
+211,1861779,Apelação Cível / Dívida Ativa,,,,,
+212,1861780,Apelação Cível / Dívida Ativa,,,,,
+213,1861786,Apelação Cível / Contratos Bancários,1.0,,1.0,1.0,4.0
+214,1861794,Apelação Cível / Efeito Suspensivo / Impugnação / Embargos à Execução,1.0,,1.0,1.0,5.0
+215,1861802,Apelação Cível / Eletiva,1.0,,,2.0,2.0
+216,1861819,Apelação Cível / Dívida Ativa,,,,,
+217,1861820,Apelação Cível / Dívida Ativa,,,,,
+218,1861842,Apelação Cível / Dívida Ativa,,,,,
+219,1861851,Apelação Cível / Dívida Ativa,,,,,
+220,1861856,"Apelação Cível / Defeito, nulidade ou anulação",2.0,3.0,7.0,3.0,2.0
+221,1861861,Apelação Cível / Dívida Ativa,,,,,
+222,1861862,Apelação Cível / Dívida Ativa,,,,,
+223,1861873,Apelação Cível / Dívida Ativa,,,,,
+224,1861887,Apelação Cível / Dívida Ativa,,,,,
+225,1861888,Apelação Cível / Dívida Ativa,,,,,
+226,1861910,Apelação Cível / Dívida Ativa,,,,,
+227,1861928,Apelação Cível / Dívida Ativa,,,,,
+228,1861929,Apelação Cível / Dívida Ativa,,,,,
+229,1861948,Apelação Cível / Dívida Ativa,,,,,
+230,1861949,Apelação Cível / Dívida Ativa,,,,,
+231,1861955,Apelação Cível / Dívida Ativa,10.0,,,,
+232,1861956,Apelação Cível / Dívida Ativa,9.0,,,,
+233,1860285,Embargos de Declaração Criminal / Peculato,1.0,,8.0,1.0,3.0
+234,1860332,Revisão Criminal / Tráfico de Drogas e Condutas Afins,8.0,,1.0,1.0,
+235,1859274,Agravo Interno Cível / Oncológico,,,1.0,1.0,
+236,1859287,Agravo Interno Cível / ISS/ Imposto sobre Serviços,1.0,,1.0,1.0,2.0
+237,1859290,Agravo Interno Cível / Cédula Hipotecária,1.0,1.0,1.0,1.0,1.0
+238,1859291,Agravo Interno Criminal / Furto Qualificado,,,5.0,8.0,
+239,1859294,Apelação Cível / Padronizado,1.0,5.0,3.0,1.0,2.0
+240,1859300,Agravo Interno Cível / Pagamento Indevido,1.0,1.0,1.0,1.0,1.0
+241,1859305,Embargos de Declaração Criminal / Tráfico de Drogas e Condutas Afins,,,5.0,6.0,
+242,1859307,Agravo Interno Cível / Expurgos Inflacionários / Planos Econômicos,1.0,1.0,1.0,1.0,1.0
+243,1859322,Embargos de Declaração Criminal / Monitoração Eletrônica - Medida Cautelar,1.0,,1.0,1.0,3.0
+244,1859326,Agravo Interno Cível / Alienação Fiduciária,1.0,5.0,1.0,1.0,1.0
+245,1859342,Embargos de Declaração Criminal / Tráfico de Drogas e Condutas Afins,2.0,,3.0,1.0,4.0
+246,1859373,Agravo de Instrumento / Obrigação de Fazer / Não Fazer,1.0,,1.0,1.0,2.0
+247,1859382,Agravo de Instrumento / Bem de Família (Voluntário),1.0,,1.0,1.0,3.0
+248,1859404,Embargos de Declaração Criminal / Livramento condicional,1.0,,1.0,1.0,3.0
+249,1859407,Apelação Cível / Acidente de Trânsito,1.0,1.0,1.0,1.0,1.0
+250,1859418,Agravo de Instrumento / Fato Atípico,1.0,1.0,1.0,1.0,1.0
+251,1859442,Apelação Criminal / Crimes contra as Relações de Consumo,1.0,2.0,1.0,1.0,1.0
+252,1859519,Apelação Cível / Contratos Bancários,3.0,,4.0,1.0,6.0
+253,1859636,Apelação Criminal / Tráfico de Drogas e Condutas Afins,2.0,,4.0,1.0,4.0
+254,1858844,Apelação Cível / Dívida Ativa,,1.0,,,6.0
+255,1858335,Apelação Criminal / Furto Qualificado,,,1.0,1.0,
+256,1858345,Embargos de Declaração Criminal / Restituição de Coisas Apreendidas,1.0,,1.0,1.0,4.0
+257,1858370,Apelação Criminal / Tráfico de Drogas e Condutas Afins,,,1.0,1.0,
+258,1858389,Embargos de Declaração Criminal / Tráfico de Drogas e Condutas Afins,1.0,,1.0,1.0,4.0
+259,1858399,Embargos de Declaração Criminal / Tráfico de Drogas e Condutas Afins,1.0,,8.0,3.0,4.0
+260,1858586,Recurso em Sentido Estrito / Homicídio Qualificado,1.0,,1.0,1.0,3.0
+261,1857994,Agravo de Instrumento / Inventário e Partilha,1.0,1.0,,2.0,1.0
+262,1858041,Embargos de Declaração Cível / Penhora / Depósito/ Avaliação,1.0,8.0,1.0,1.0,2.0
+263,1858046,Apelação Cível / Perdas e Danos,1.0,1.0,1.0,1.0,1.0
+264,1858111,Revisão Criminal / Uso de documento falso,1.0,6.0,1.0,1.0,2.0
+265,1858135,"Embargos de Declaração Cível / Defeito, nulidade ou anulação",3.0,4.0,3.0,1.0,1.0
+266,1858140,Embargos de Declaração Cível / Usucapião Extraordinária,1.0,1.0,,2.0,1.0
+267,1858174,"Apelação Cível / Defeito, nulidade ou anulação",1.0,4.0,6.0,1.0,1.0
+268,1858185,Apelação Cível / Dívida Ativa,8.0,,,,
+269,1858191,Apelação Cível / Dívida Ativa,7.0,,,,
+270,1858192,Apelação Cível / Dívida Ativa,,,,,
+271,1858193,Apelação Cível / Dívida Ativa,,,,,
+272,1858197,Apelação Cível / Dívida Ativa,,,,,
+273,1857073,Recurso em Sentido Estrito / Indisponibilidade / Seqüestro de Bens,1.0,,,2.0,2.0
+274,1857146,Apelação Criminal / Tráfico de Drogas e Condutas Afins,1.0,1.0,,2.0,1.0
+275,1857293,Apelação Cível / Dívida Ativa,,,,,
+276,1857294,Apelação Cível / Dívida Ativa,,,,,
+277,1857306,Apelação Cível / Dívida Ativa,,,,,
+278,1857319,Apelação Cível / Dívida Ativa,,,,,
+279,1857320,Apelação Cível / Dívida Ativa,,,,,
+280,1857335,Apelação Cível / Dívida Ativa,,,,,
+281,1857350,Apelação Cível / Dívida Ativa,,,,,
+282,1857365,Apelação Cível / Dívida Ativa,,,,,
+283,1857366,Apelação Cível / Dívida Ativa,,,,,
+284,1857379,Apelação Cível / Dívida Ativa,,,,,
+285,1857380,Apelação Cível / Dívida Ativa,,,,,
+286,1857401,Apelação Cível / Dívida Ativa,,,,,
+287,1857402,Apelação Cível / Dívida Ativa,,,,,
+288,1857403,Embargos de Declaração Criminal / Contagem de Prazo para os Benefícios,1.0,,1.0,1.0,2.0
+289,1857409,Apelação Cível / Dívida Ativa,,,,,
+290,1857410,Apelação Cível / Dívida Ativa,,,,,
+291,1857421,Apelação Cível / Dívida Ativa,,,,,
+292,1857422,Apelação Cível / Dívida Ativa,,,,,
+293,1857432,Apelação Cível / Dívida Ativa,,,,,
+294,1857433,Apelação Cível / Dívida Ativa,,,,,
+295,1857444,Apelação Cível / Dívida Ativa,,,,,
+296,1857445,Apelação Cível / Dívida Ativa,,,,,
+297,1856344,Agravo Interno Cível / Perdas e Danos,1.0,1.0,1.0,1.0,1.0
+298,1856556,Apelação Cível / Dívida Ativa,,,,,
+299,1854823,Embargos de Declaração Cível / Despejo para Uso Próprio,1.0,,2.0,1.0,2.0
+300,1854859,Embargos de Declaração Criminal / Tráfico de Drogas e Condutas Afins,,,5.0,9.0,
+301,1854896,Apelação Cível / Regularidade Formal,1.0,,1.0,1.0,5.0
+302,1854921,Embargos de Declaração Cível / Seguro,1.0,,3.0,1.0,5.0
+303,1854961,Apelação Criminal / Tráfico de Drogas e Condutas Afins,,,1.0,1.0,
+304,1854967,Agravo Interno Cível / Contratos Bancários,1.0,,1.0,1.0,2.0
+305,1854982,Embargos de Declaração Cível / Prestação de Serviços,1.0,3.0,2.0,1.0,1.0
+306,1854990,Apelação Criminal / Corrupção passiva,1.0,6.0,1.0,1.0,1.0
+307,1855017,Embargos de Declaração Criminal / Furto,4.0,,4.0,4.0,8.0
+308,1855041,Apelação Cível / Dívida Ativa,,,,,
+309,1855044,Apelação Criminal / Tráfico de Drogas e Condutas Afins,1.0,,5.0,1.0,4.0
+310,1855055,Apelação Cível / Dívida Ativa,,,10.0,,
+311,1855056,Apelação Cível / Dívida Ativa,,,,,
+312,1855057,Apelação Cível / Dívida Ativa,,,9.0,,
+313,1855071,Apelação Cível / Dívida Ativa,,,,,
+314,1855072,Apelação Cível / Dívida Ativa,,,8.0,,
+315,1855073,Apelação Cível / Dívida Ativa,,,,,
+316,1855074,Apelação Cível / Dívida Ativa,,,,,
+317,1855075,Apelação Cível / Dívida Ativa,,,7.0,,
+318,1855088,Apelação Cível / Dívida Ativa,,,6.0,,
+319,1855089,Apelação Cível / Dívida Ativa,,,5.0,9.0,
+320,1855102,Apelação Cível / Dívida Ativa,,,4.0,7.0,
+321,1855103,Apelação Cível / Dívida Ativa,,,,,
+322,1855128,Embargos de Declaração Criminal / Tráfico de Drogas e Condutas Afins,1.0,2.0,1.0,1.0,1.0
+323,1855159,Apelação Cível / Dívida Ativa,,,3.0,5.0,
+324,1855175,Apelação Cível / Dívida Ativa,,,2.0,3.0,
+325,1855176,Apelação Cível / Dívida Ativa,,,1.0,1.0,
+326,1855181,Apelação Cível / Práticas Abusivas,1.0,5.0,3.0,1.0,2.0
+327,1855186,Apelação Cível / Dívida Ativa,,,,,
+328,1855187,Apelação Cível / Dívida Ativa,,,,,
+329,1855210,Apelação Cível / Dívida Ativa,,,,,
+330,1855211,Apelação Cível / Dívida Ativa,,,,,
+331,1855230,Apelação Cível / Dívida Ativa,,,,,
+332,1855251,Apelação Cível / Dívida Ativa,,,,,
+333,1855252,Apelação Cível / Dívida Ativa,,,,,
+334,1855254,Apelação Cível / Dívida Ativa,,,,,
+335,1862942,Apelação Criminal / Apropriação indébita,3.0,,2.0,1.0,8.0
+336,1862946,Apelação Criminal / Roubo,1.0,,5.0,1.0,5.0
+337,1862948,Apelação Criminal / Tráfico de Drogas e Condutas Afins,1.0,,1.0,1.0,5.0
+338,1862957,Apelação Criminal / Roubo Majorado,1.0,6.0,3.0,1.0,2.0
+339,1862965,Apelação Criminal / Tráfico de Drogas e Condutas Afins,1.0,,1.0,1.0,6.0
+340,1862973,Apelação Criminal / Roubo Majorado,,,,,
+341,1862978,Apelação Criminal / Roubo Majorado,1.0,1.0,1.0,1.0,1.0
+342,1862990,Apelação Criminal / Furto,1.0,,2.0,1.0,6.0
+343,1862297,Apelação Criminal / Homicídio Qualificado,3.0,,,6.0,6.0
+344,1862321,Apelação Criminal / Tráfico de Drogas e Condutas Afins,1.0,,,2.0,5.0
+345,1862327,Apelação Criminal / Tráfico de Drogas e Condutas Afins,,,,,
+346,1862341,Apelação Criminal / Roubo,1.0,2.0,5.0,1.0,1.0
+347,1862358,Apelação Criminal / Tráfico de Drogas e Condutas Afins,,,7.0,,
+348,1862401,Agravo Interno Criminal / Tráfico de Drogas e Condutas Afins,6.0,,2.0,1.0,
+349,1862444,Apelação Criminal / Tráfico de Drogas e Condutas Afins,1.0,,,2.0,6.0
+350,1861321,Apelação Criminal / Tráfico de Drogas e Condutas Afins,1.0,,,3.0,6.0
+351,1861390,Apelação Criminal / Leve,1.0,,4.0,1.0,4.0
+352,1861391,Apelação Criminal / Furto Qualificado,,,1.0,1.0,
+353,1861446,Apelação Criminal / Crimes de Trânsito,1.0,,,3.0,5.0
+354,1861489,Apelação Criminal / Crimes de Trânsito,5.0,,1.0,2.0,9.0
+355,1861490,Apelação Criminal / Crimes do Sistema Nacional de Armas,1.0,,,6.0,2.0
+356,1861517,Apelação Criminal / Tráfico de Drogas e Condutas Afins,1.0,,,2.0,5.0
+357,1861568,Apelação Criminal / Grave,1.0,10.0,1.0,1.0,2.0
+358,1861596,Revisão Criminal / Tráfico de Drogas e Condutas Afins,1.0,8.0,1.0,1.0,2.0
+359,1861676,Apelação Criminal / Leve,,,,,
+360,1860279,Conselho de Justificação / Transferência para reserva,1.0,,1.0,1.0,7.0
+361,1860294,Apelação Criminal / Tráfico de Drogas e Condutas Afins,1.0,9.0,10.0,1.0,4.0
+362,1860300,Apelação Criminal / Estelionato,1.0,,1.0,1.0,5.0
+363,1860304,Apelação Criminal / Traslado ou Descarte de Resíduos/Efluentes,1.0,,1.0,1.0,6.0
+364,1860319,Apelação Criminal / Maus Tratos,1.0,,1.0,1.0,2.0
+365,1860330,Apelação Criminal / Uso de documento falso,2.0,,1.0,1.0,6.0
+366,1860345,Apelação Criminal / Crimes do Sistema Nacional de Armas,1.0,,1.0,1.0,7.0
+367,1860348,Apelação Criminal / Estelionato,1.0,,1.0,1.0,5.0
+368,1860352,Revisão Criminal / Tráfico de Drogas e Condutas Afins,9.0,,6.0,3.0,
+369,1860391,Revisão Criminal / Tráfico de Drogas e Condutas Afins,1.0,,2.0,1.0,7.0
+370,1860412,Apelação Criminal / Homicídio Qualificado,1.0,,1.0,1.0,4.0
+371,1860440,Revisão Criminal / Tráfico de Drogas e Condutas Afins,5.0,10.0,4.0,1.0,4.0
+372,1859299,Apelação Criminal / Tráfico de Drogas e Condutas Afins,1.0,,1.0,1.0,6.0
+373,1859302,Apelação Criminal / Tráfico de Drogas e Condutas Afins,3.0,10.0,,6.0,3.0
+374,1859378,Apelação Criminal / Crimes de Trânsito,1.0,,1.0,1.0,5.0
+375,1859428,Apelação Criminal / Roubo Majorado,,10.0,,,
+376,1859467,Apelação Criminal / Crimes Previstos no Estatuto da criança e do adolescente,1.0,,3.0,1.0,4.0
+377,1859549,Apelação Criminal / Restituição de Coisas Apreendidas,1.0,,1.0,1.0,6.0
+378,1859559,Apelação Criminal / Roubo Majorado,1.0,1.0,,2.0,1.0
+379,1859566,Apelação Criminal / Furto Qualificado,3.0,,,6.0,7.0
+380,1859687,Habeas Corpus Criminal / Liminar,1.0,,1.0,1.0,4.0
+381,1859713,Apelação Criminal / Tráfico de Drogas e Condutas Afins,6.0,6.0,,,4.0
+382,1858331,Apelação Criminal / Crimes de Trânsito,,,1.0,1.0,
+383,1858334,Apelação Criminal / Tráfico de Drogas e Condutas Afins,1.0,10.0,1.0,1.0,4.0
+384,1858340,Apelação Criminal / Crimes de Trânsito,1.0,,7.0,1.0,5.0
+385,1858346,Apelação Criminal / Furto Qualificado,1.0,,1.0,1.0,5.0
+386,1858353,Apelação Criminal / Latrocínio,1.0,5.0,1.0,1.0,2.0
+387,1858372,Apelação Criminal / Roubo Majorado,2.0,,10.0,1.0,7.0
+388,1858374,Apelação Criminal / Furto,1.0,8.0,1.0,1.0,1.0
+389,1858376,Apelação Criminal / Crimes do Sistema Nacional de Armas,1.0,,6.0,1.0,6.0
+390,1858396,Apelação Criminal / Tráfico de Drogas e Condutas Afins,1.0,3.0,,2.0,1.0
+391,1858414,Apelação Criminal / Tráfico de Drogas e Condutas Afins,1.0,,,2.0,7.0
+392,1858417,Apelação Criminal / Furto,1.0,,5.0,1.0,5.0
+393,1858437,Apelação Criminal / Furto Qualificado,1.0,,,2.0,6.0
+394,1858448,Apelação Criminal / Tráfico de Drogas e Condutas Afins,,,6.0,10.0,
+395,1858462,Apelação Criminal / Tráfico de Drogas e Condutas Afins,6.0,,2.0,2.0,
+396,1858521,Apelação Criminal / Tráfico de Drogas e Condutas Afins,1.0,,,2.0,7.0
+397,1858531,Agravo de Execução Penal / Regressão de Regime,1.0,2.0,1.0,1.0,1.0
+398,1858560,Apelação Criminal / Furto,1.0,6.0,1.0,1.0,3.0
+399,1858573,Apelação Criminal / Homicídio Qualificado,1.0,,5.0,1.0,6.0
+400,1858607,Apelação Criminal / Crimes do Sistema Nacional de Armas,1.0,,1.0,1.0,6.0
+401,1858617,Apelação Criminal / Roubo Majorado,1.0,,1.0,1.0,5.0
+402,1857981,Apelação Criminal / Tráfico de Drogas e Condutas Afins,1.0,,,2.0,5.0
+403,1857985,Apelação Criminal / Tráfico de Drogas e Condutas Afins,,,8.0,,
+404,1858170,Apelação Criminal / Tráfico de Drogas e Condutas Afins,1.0,,1.0,1.0,6.0
+405,1857052,Apelação Criminal / Homicídio Qualificado,4.0,,1.0,1.0,7.0
+406,1857053,Apelação Criminal / Crimes do Sistema Nacional de Armas,1.0,7.0,,4.0,1.0
+407,1857097,Apelação Criminal / Estelionato,1.0,3.0,5.0,1.0,1.0
+408,1857107,Apelação Criminal / Tráfico de Drogas e Condutas Afins,3.0,,2.0,1.0,7.0
+409,1857108,"Apelação Criminal / Intolerância e/ou Injúria Racial, de Cor e/ou Etnia",1.0,,1.0,1.0,5.0
+410,1857144,Apelação Criminal / Roubo Majorado,1.0,,3.0,1.0,6.0
+411,1857159,Apelação Criminal / Tráfico de Drogas e Condutas Afins,8.0,,6.0,1.0,
+412,1857394,Apelação Criminal / Furto Qualificado,1.0,,4.0,1.0,4.0
+413,1857395,Apelação Criminal / Receptação,1.0,,3.0,1.0,5.0
+414,1857413,Apelação Criminal / Adulteração de Sinal Identificador de Veículo Automotor,1.0,,10.0,2.0,6.0
+415,1857462,"Apelação Criminal / Intolerância e/ou Injúria Racial, de Cor e/ou Etnia",1.0,,1.0,1.0,5.0
+416,1857468,Apelação Criminal / Furto Qualificado,1.0,,1.0,1.0,5.0
+417,1856363,Apelação Criminal / Tráfico de Drogas e Condutas Afins,,,,,
+418,1856365,Apelação Criminal / Furto,1.0,,3.0,1.0,6.0
+419,1856367,Apelação Criminal / Desobediência,1.0,,1.0,1.0,5.0
+420,1856372,Apelação Criminal / Furto Qualificado,,,,,
+421,1856499,Revisão Criminal / Roubo Majorado,1.0,1.0,1.0,1.0,1.0
+422,1856500,Revisão Criminal / Roubo Majorado,1.0,2.0,7.0,1.0,1.0
+423,1856514,Apelação Criminal / Roubo Majorado,1.0,,,2.0,6.0
+424,1856523,Apelação Criminal / Furto Qualificado,1.0,,6.0,1.0,6.0
+425,1854829,Apelação Criminal / Tráfico de Drogas e Condutas Afins,,,4.0,7.0,
+426,1854934,Apelação Criminal / Crimes de Trânsito,,,,,
+427,1854940,Apelação Criminal / Crimes contra a Flora,1.0,,1.0,1.0,6.0
+428,1854972,Apelação Criminal / Tráfico de Drogas e Condutas Afins,1.0,,4.0,1.0,7.0
+429,1854994,Apelação Criminal / Tráfico de Drogas e Condutas Afins,1.0,,1.0,1.0,7.0
+430,1855018,Apelação Criminal / Receptação,5.0,,1.0,1.0,8.0
+431,1855066,Apelação Criminal / Grave,1.0,,1.0,1.0,6.0
+432,1855095,Apelação Criminal / Roubo Majorado,1.0,,1.0,1.0,6.0
+433,1855131,Apelação Criminal / Do Sistema Nacional de Armas,1.0,,1.0,1.0,5.0
+434,1855182,Apelação Criminal / Tráfico de Drogas e Condutas Afins,1.0,,1.0,1.0,5.0
+435,1855208,Apelação Criminal / Crimes do Sistema Nacional de Armas,1.0,9.0,2.0,1.0,1.0
+436,1855228,Apelação Criminal / Furto,1.0,,1.0,1.0,6.0
+437,1855229,Apelação Criminal / Receptação,1.0,10.0,2.0,2.0,1.0
+438,1855439,Apelação Criminal / Furto Qualificado,,,2.0,4.0,
+439,1853832,Apelação Criminal / Furto Qualificado,1.0,3.0,10.0,2.0,2.0
+440,1853858,Embargos de Declaração Criminal / Tráfico de Drogas e Condutas Afins,1.0,,1.0,1.0,6.0
+441,1853866,Apelação Criminal / Crimes de Trânsito,1.0,1.0,1.0,1.0,1.0
+442,1853878,Apelação Criminal / Tráfico de Drogas e Condutas Afins,1.0,4.0,,2.0,1.0
+443,1853885,Apelação Criminal / Tráfico de Drogas e Condutas Afins,1.0,4.0,,2.0,2.0
+444,1853899,Apelação Criminal / Tráfico de Drogas e Condutas Afins,8.0,,1.0,1.0,
+445,1853900,Apelação Criminal / Incêndio,2.0,,1.0,1.0,5.0
+446,1853907,Apelação Criminal / Tráfico de Drogas e Condutas Afins,1.0,,1.0,1.0,4.0
+447,1853925,Apelação Criminal / Tráfico de Drogas e Condutas Afins,1.0,1.0,,2.0,1.0
+448,1853957,Embargos de Declaração Criminal / Contagem de Prazo para os Benefícios,1.0,,1.0,1.0,4.0
+449,1854018,Apelação Criminal / Tráfico de Drogas e Condutas Afins,,,,,
+450,1854042,Embargos de Declaração Criminal / Remição,1.0,,5.0,1.0,3.0
+451,1854078,Apelação Criminal / Tráfico de Drogas e Condutas Afins,3.0,,3.0,1.0,6.0
+452,1854108,Agravo de Execução Penal / Prisão Domiciliar / Especial,1.0,10.0,1.0,1.0,3.0
+453,1854162,Apelação Criminal / Tráfico de Drogas e Condutas Afins,1.0,8.0,6.0,1.0,1.0
+454,1854212,Apelação Criminal / Tráfico de Drogas e Condutas Afins,,,7.0,,
+455,1854237,Agravo de Execução Penal / Contagem de Prazo para os Benefícios,1.0,2.0,1.0,1.0,1.0
+456,1854329,Apelação Criminal / Furto,,,2.0,3.0,
+457,1853192,Apelação Criminal / Tráfico de Drogas e Condutas Afins,1.0,10.0,,2.0,3.0
+458,1853195,Apelação Criminal / Tráfico de Drogas e Condutas Afins,3.0,,1.0,1.0,8.0
+459,1853230,Embargos de Declaração Criminal / Tráfico de Drogas e Condutas Afins,1.0,,1.0,1.0,5.0
+460,1853242,Apelação Criminal / Tráfico de Drogas e Condutas Afins,3.0,,5.0,1.0,8.0
+461,1853246,Apelação Criminal / Tráfico de Drogas e Condutas Afins,1.0,,,2.0,7.0
+462,1853261,Apelação Criminal / Tráfico de Drogas e Condutas Afins,,,1.0,2.0,
+463,1853268,Apelação Criminal / Tráfico de Drogas e Condutas Afins,,,1.0,1.0,
+464,1853278,Embargos de Declaração Criminal / Tráfico de Drogas e Condutas Afins,2.0,,2.0,2.0,6.0
+465,1853297,Apelação Criminal / Tráfico de Drogas e Condutas Afins,,,5.0,9.0,
+466,1853298,Apelação Criminal / Furto Qualificado,3.0,,1.0,1.0,7.0
+467,1853307,Apelação Criminal / Tráfico de Drogas e Condutas Afins,1.0,,,2.0,6.0
+468,1853332,Embargos de Declaração Criminal / Crimes de Trânsito,1.0,,4.0,1.0,3.0
+469,1853365,Apelação Criminal / Receptação,,,6.0,,
+470,1853374,Embargos de Declaração Criminal / Prisão Preventiva,1.0,5.0,1.0,1.0,1.0
+471,1853376,Apelação Criminal / Maus Tratos,1.0,,1.0,1.0,5.0
+472,1853394,Embargos de Declaração Criminal / Livramento condicional,1.0,,1.0,1.0,4.0
+473,1853401,Apelação Criminal / Crimes do Sistema Nacional de Armas,1.0,5.0,1.0,1.0,1.0
+474,1853407,Apelação Criminal / Furto Qualificado,1.0,,3.0,1.0,4.0
+475,1853427,Revisão Criminal / Tráfico de Drogas e Condutas Afins,1.0,4.0,4.0,1.0,1.0
+476,1853453,Mandado de Segurança Cível / Tutela de Urgência,1.0,4.0,1.0,1.0,2.0
+477,1853470,Revisão Criminal / Latrocínio,1.0,6.0,2.0,1.0,2.0
+478,1853530,Agravo de Execução Penal / Regressão de Regime,1.0,,1.0,1.0,5.0
+479,1853591,Agravo de Execução Penal / Regressão de Regime,7.0,8.0,1.0,1.0,4.0
+480,1853624,Apelação Criminal / Crime de Descumprimento de Medida Protetiva de Urgência,1.0,,1.0,1.0,5.0
+481,1853626,Agravo de Execução Penal / Comutação de Pena,1.0,1.0,7.0,1.0,1.0
+482,1853639,Habeas Corpus Criminal / Trancamento,10.0,,1.0,1.0,
+483,1853654,Revisão Criminal / Latrocínio,1.0,,,2.0,5.0
+484,1853669,Agravo de Execução Penal / Liminar,1.0,,2.0,1.0,3.0
+485,1853680,Apelação Criminal / Furto,,,1.0,2.0,
+486,1853692,Apelação Criminal / Crimes de Trânsito,,,,,
+487,1853726,Habeas Corpus Criminal / Roubo Majorado,2.0,,2.0,1.0,5.0
+488,1853783,Habeas Corpus Criminal / Liberdade Provisória,1.0,,1.0,1.0,6.0
+489,1849751,Agravo Interno Cível / Tutela de Urgência,1.0,2.0,1.0,1.0,1.0
+490,1849851,Apelação Cível / Obrigação de Fazer / Não Fazer,1.0,5.0,,2.0,1.0
+491,1849229,Apelação Cível / Inexequibilidade do Título / Inexigibilidade da Obrigação,1.0,1.0,,2.0,1.0
+492,1849409,Apelação Criminal / Grave,4.0,,,8.0,7.0
+493,1849560,Revisão Criminal / Tráfico de Drogas e Condutas Afins,1.0,8.0,1.0,1.0,2.0
+494,1849633,Apelação Criminal / Furto Qualificado,1.0,,1.0,1.0,7.0
+495,1849651,Apelação Criminal / Tráfico de Drogas e Condutas Afins,1.0,,1.0,1.0,3.0
+496,1849660,Apelação Criminal / Roubo Majorado,1.0,,1.0,1.0,5.0
+497,1848702,Embargos de Declaração Criminal / Difamação,1.0,,2.0,1.0,4.0
+498,1848712,Apelação Criminal / Roubo Majorado,1.0,2.0,2.0,1.0,2.0
+499,1848745,Apelação Criminal / Tráfico de Drogas e Condutas Afins,5.0,,1.0,1.0,8.0
+500,1848764,Apelação Criminal / Tráfico de Drogas e Condutas Afins,1.0,1.0,,2.0,1.0
